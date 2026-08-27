@@ -5,7 +5,7 @@
 export const siteConfig = {
   name: "Prakruthi Publications",
   tagline: "Government Exam Coaching for Andhra Pradesh",
-  domain: "https://prakruthipublications.example.com", // TODO: replace once domain/Netlify URL is finalized
+  domain: "https://tangerine-granita-8c9902.netlify.app", // TODO: replace once a custom domain is connected
 
   // The 3 anchor stats — reused in Hero, credibility bar, course pages, About.
   stats: {

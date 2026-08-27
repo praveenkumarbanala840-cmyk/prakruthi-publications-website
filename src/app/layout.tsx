@@ -3,6 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import StickyBottomCTA from "@/components/layout/StickyBottomCTA";
+import { siteConfig } from "@/lib/site-config";
 import "./globals.css";
 
 const inter = Inter({
@@ -17,7 +18,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://prakruthipublications.example.com"),
+  metadataBase: new URL(siteConfig.domain),
   title: {
     default: "Prakruthi Publications — DSC, APSET & Government Exam Coaching",
     template: "%s | Prakruthi Publications",
