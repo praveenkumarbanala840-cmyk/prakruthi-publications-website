@@ -28,7 +28,7 @@ export const siteConfig = {
   instagramUrl: "",
 } as const;
 
-export function whatsappLink(message = siteConfig.whatsappMessage) {
+export function whatsappLink(message: string = siteConfig.whatsappMessage) {
   const number = siteConfig.whatsappNumber;
   const text = encodeURIComponent(message);
   return number ? `https://wa.me/${number}?text=${text}` : "#";
@@ -45,7 +45,7 @@ export interface ExamNavItem {
 // Gurukulalu is flagged per the client's open question in the brief — confirm
 // whether it needs a full course page or stays a listing-only entry.
 export const exams: ExamNavItem[] = [
-  { slug: "dsc", name: "DSC — District Selection Committee", shortName: "DSC", badge: "DSC", hasFullCoursePage: true },
+  { slug: "dsc", name: "AP DSC — Andhra Pradesh District Selection Committee", shortName: "DSC", badge: "DSC", hasFullCoursePage: true },
   { slug: "apset", name: "APSET", shortName: "APSET", badge: "SET", hasFullCoursePage: true },
   { slug: "deo", name: "DEO — District Education Officer", shortName: "DEO", badge: "DEO", hasFullCoursePage: true },
   { slug: "cdpo", name: "CDPO — Child Development Project Officer", shortName: "CDPO", badge: "CDPO", hasFullCoursePage: true },

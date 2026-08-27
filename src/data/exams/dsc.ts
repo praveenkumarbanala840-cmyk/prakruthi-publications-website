@@ -4,6 +4,6 @@ import { emptyExamContent } from "@/data/types";
 // DSC is the highest priority exam (December exam window) — see build brief section 9.
 export const dsc = emptyExamContent(
   "dsc",
-  "DSC — District Selection Committee",
+  "AP DSC — Andhra Pradesh District Selection Committee",
   "DSC"
 );
