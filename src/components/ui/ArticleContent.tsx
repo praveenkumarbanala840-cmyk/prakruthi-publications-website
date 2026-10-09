@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 
 export function ArticleH2({ children }: { children: ReactNode }) {
-  return <h2 className="font-display text-xl font-bold text-navy sm:text-2xl">{children}</h2>;
+  return <h2 className="font-display text-xl font-bold text-charcoal sm:text-2xl">{children}</h2>;
 }
 
 export function ArticleH3({ children }: { children: ReactNode }) {
-  return <h3 className="font-display text-base font-bold text-navy">{children}</h3>;
+  return <h3 className="font-display text-base font-bold text-charcoal">{children}</h3>;
 }
 
 export function ArticleP({ children }: { children: ReactNode }) {
@@ -17,7 +17,7 @@ export function ArticleList({ items }: { items: ReactNode[] }) {
     <ul className="space-y-2 text-sm leading-relaxed text-charcoal/80 sm:text-base">
       {items.map((item, i) => (
         <li key={i} className="flex gap-2">
-          <span className="mt-0.5 text-gold">&bull;</span>
+          <span className="mt-0.5 text-teal">&bull;</span>
           <span>{item}</span>
         </li>
       ))}
@@ -27,7 +27,7 @@ export function ArticleList({ items }: { items: ReactNode[] }) {
 
 export function ArticleCallout({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-xl border border-gold/30 bg-gold/5 p-4 text-sm leading-relaxed text-navy">
+    <div className="rounded-xl border border-teal/30 bg-teal/5 p-4 text-sm leading-relaxed text-charcoal">
       {children}
     </div>
   );
@@ -35,7 +35,7 @@ export function ArticleCallout({ children }: { children: ReactNode }) {
 
 export function ArticlePlaceholder({ children }: { children: ReactNode }) {
   return (
-    <div className="rounded-2xl border border-dashed border-navy/20 bg-white/60 p-6 text-center text-sm text-navy/60">
+    <div className="rounded-2xl border border-dashed border-charcoal/20 bg-white/60 p-6 text-center text-sm text-charcoal/60">
       {children}
     </div>
   );
@@ -54,10 +54,10 @@ export function ArticleTable({
   rows: Record<string, ReactNode>[];
 }) {
   return (
-    <div className="overflow-x-auto rounded-xl border border-navy/10">
+    <div className="overflow-x-auto rounded-xl border border-charcoal/10">
       <table className="w-full min-w-[480px] border-collapse text-sm">
         <thead>
-          <tr className="bg-navy text-left text-white">
+          <tr className="bg-ink text-left text-white">
             {columns.map((col) => (
               <th key={col.key} className="px-4 py-3 font-semibold">
                 {col.label}
@@ -67,9 +67,9 @@ export function ArticleTable({
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-cream"}>
+            <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-surface"}>
               {columns.map((col) => (
-                <td key={col.key} className="border-t border-navy/10 px-4 py-3 text-charcoal/80">
+                <td key={col.key} className="border-t border-charcoal/10 px-4 py-3 text-charcoal/80">
                   {row[col.key]}
                 </td>
               ))}

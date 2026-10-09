@@ -2,13 +2,13 @@ import Link from "next/link";
 import { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-gold disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-mint disabled:opacity-50 disabled:pointer-events-none";
 
 const variants = {
-  primary: "bg-gold text-navy hover:bg-gold-light shadow-sm",
-  secondary: "bg-navy text-white hover:bg-navy-light",
-  outline: "border-2 border-navy text-navy hover:bg-navy hover:text-white",
-  ghost: "text-navy hover:bg-navy/5",
+  primary: "bg-mint text-black hover:bg-mint-dark shadow-sm",
+  secondary: "bg-ink text-white hover:bg-ink-light",
+  outline: "border-2 border-ink text-ink hover:bg-ink hover:text-white",
+  ghost: "text-white hover:bg-white/10",
 };
 
 const sizes = {

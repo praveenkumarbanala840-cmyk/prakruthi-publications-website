@@ -27,7 +27,7 @@ export default function DscPreparationTipsPage() {
             test — the single largest section by far. Give it the majority of
             your study time before spreading effort across General Knowledge,
             Perspectives in Education, and Educational Psychology. See the full{" "}
-            <Link href="/exams/dsc/syllabus-2026" className="font-semibold text-gold hover:underline">
+            <Link href="/exams/dsc/syllabus-2026" className="font-semibold text-teal hover:underline">
               syllabus breakdown
             </Link>{" "}
             to plan accordingly.
@@ -57,7 +57,7 @@ export default function DscPreparationTipsPage() {
             making an informed guess rather than skipping. Time yourself
             against the actual 150-minute format so pacing isn&apos;t a
             surprise on exam day. See the full{" "}
-            <Link href="/exams/dsc/exam-pattern" className="font-semibold text-gold hover:underline">
+            <Link href="/exams/dsc/exam-pattern" className="font-semibold text-teal hover:underline">
               exam pattern
             </Link>{" "}
             for the exact format.
@@ -71,7 +71,7 @@ export default function DscPreparationTipsPage() {
           <ArticleP>
             Previous papers show you the actual difficulty level and question
             style, not just the syllabus topics. We&apos;re compiling AP DSC{" "}
-            <Link href="/exams/dsc/previous-papers" className="font-semibold text-gold hover:underline">
+            <Link href="/exams/dsc/previous-papers" className="font-semibold text-teal hover:underline">
               previous papers and analysis
             </Link>{" "}
             — check back as this section grows.

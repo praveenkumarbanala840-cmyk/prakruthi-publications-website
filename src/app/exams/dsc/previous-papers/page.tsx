@@ -65,7 +65,7 @@ export default function DscPreviousPapersPage() {
           <ArticleP>
             Content &amp; Methodology carries the largest share of marks in the
             official exam pattern (60 of 80 marks for SGT — see the{" "}
-            <Link href="/exams/dsc/exam-pattern" className="font-semibold text-gold hover:underline">
+            <Link href="/exams/dsc/exam-pattern" className="font-semibold text-teal hover:underline">
               exam pattern breakdown
             </Link>
             ). A precise topic-wise weightage derived from actual past papers
@@ -74,8 +74,8 @@ export default function DscPreviousPapersPage() {
         </div>
       </div>
 
-      <div className="rounded-xl border border-navy/10 bg-cream p-5 text-center">
-        <p className="text-sm text-navy/70">
+      <div className="rounded-xl border border-charcoal/10 bg-surface p-5 text-center">
+        <p className="text-sm text-charcoal/70">
           Have AP DSC previous papers you&apos;d like included, or a question
           about a specific year?
         </p>

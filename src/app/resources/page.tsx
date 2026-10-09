@@ -24,9 +24,9 @@ function formatDisplayDate(iso: string) {
 export default function ResourcesPage() {
   return (
     <>
-      <section className="border-b border-navy/10 bg-white">
+      <section className="border-b border-charcoal/10 bg-white">
         <Container className="py-10 sm:py-14">
-          <h1 className="font-display text-3xl font-extrabold text-navy sm:text-4xl">
+          <h1 className="font-display text-3xl font-extrabold text-charcoal sm:text-4xl">
             Resources
           </h1>
           <p className="mt-3 max-w-2xl text-sm text-charcoal/70 sm:text-base">
@@ -42,27 +42,27 @@ export default function ResourcesPage() {
             return (
               <div key={group.exam}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h2 className="font-display text-xl font-bold text-navy">{group.label}</h2>
-                  <p className="text-xs text-navy/50">{group.source}</p>
+                  <h2 className="font-display text-xl font-bold text-charcoal">{group.label}</h2>
+                  <p className="text-xs text-charcoal/50">{group.source}</p>
                 </div>
 
                 {papers.length > 0 ? (
-                  <ul className="mt-4 divide-y divide-navy/10 rounded-xl border border-navy/10 bg-white">
+                  <ul className="mt-4 divide-y divide-charcoal/10 rounded-xl border border-charcoal/10 bg-white">
                     {papers.map((paper) => (
                       <li
                         key={paper.path}
                         className="flex flex-wrap items-center justify-between gap-3 px-4 py-3"
                       >
                         <div>
-                          <p className="text-sm font-medium text-navy">{paper.title}</p>
-                          <p className="text-xs text-navy/50">
+                          <p className="text-sm font-medium text-charcoal">{paper.title}</p>
+                          <p className="text-xs text-charcoal/50">
                             {formatDisplayDate(paper.date)} {paper.year} &middot; {paper.size} MB
                           </p>
                         </div>
                         <a
                           href={paper.path}
                           download
-                          className="shrink-0 rounded-full bg-gold px-4 py-1.5 text-xs font-semibold text-navy hover:bg-gold-light"
+                          className="shrink-0 rounded-full bg-mint px-4 py-1.5 text-xs font-semibold text-black hover:bg-mint-dark"
                         >
                           Download PDF
                         </a>
@@ -70,8 +70,8 @@ export default function ResourcesPage() {
                     ))}
                   </ul>
                 ) : (
-                  <div className="mt-4 rounded-xl border border-dashed border-navy/20 bg-white/60 p-6 text-center">
-                    <p className="text-sm text-navy/60">Coming soon</p>
+                  <div className="mt-4 rounded-xl border border-dashed border-charcoal/20 bg-white/60 p-6 text-center">
+                    <p className="text-sm text-charcoal/60">Coming soon</p>
                   </div>
                 )}
               </div>

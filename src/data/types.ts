@@ -32,6 +32,27 @@ export interface PreviousPaper {
   pdfUrl: string;
 }
 
+export interface CourseVideo {
+  youtubeId: string;
+  title?: string;
+}
+
+export interface Review {
+  name: string;
+  exam: string;
+  quote: string;
+  stars: 1 | 2 | 3 | 4 | 5;
+}
+
+export interface CoursePrice {
+  amount: string; // e.g. "₹1,999" — a plain string so the client can format it
+}
+
+export interface CourseOffer {
+  description: string;
+  validUntil: string; // ISO date (YYYY-MM-DD) — offer auto-hides after this date
+}
+
 export interface ExamContent {
   slug: string;
   name: string;
@@ -45,6 +66,22 @@ export interface ExamContent {
   faq: FaqItem[];
   previousPapers: PreviousPaper[];
   sourceAuthority?: string; // official board name, cited near paper downloads
+
+  // Which /exams/<slug>/<article> pages actually exist for this exam, so
+  // course/article pages never link to a page that isn't built. Defaults to
+  // all 4 (matching the exams that already have the full set).
+  availableArticles: ("syllabus-2026" | "exam-pattern" | "previous-papers" | "preparation-tips")[];
+
+  // Rich video-course fields (course page hero/video/lessons/shorts/reviews/price).
+  // All optional — each section hides when its field is empty/undefined.
+  heroHeadline?: string;
+  heroSecondaryCta?: { label: string; href: string }; // overrides the default "WhatsApp Enquiry" hero button
+  introVideo?: CourseVideo;
+  lessons?: string[]; // ordered list of video/lesson titles
+  shorts?: CourseVideo[];
+  reviews?: Review[];
+  price?: CoursePrice;
+  offer?: CourseOffer;
 }
 
 /** Placeholder content-data shell for an exam not yet filled in by the client. */
@@ -65,5 +102,6 @@ export function emptyExamContent(
     testimonials: [],
     faq: [],
     previousPapers: [],
+    availableArticles: ["syllabus-2026", "exam-pattern", "previous-papers", "preparation-tips"],
   };
 }

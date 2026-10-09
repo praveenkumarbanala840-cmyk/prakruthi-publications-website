@@ -1,26 +1,43 @@
 @import "tailwindcss";
 
 :root {
-  --background: #faf7f0;
-  --foreground: #1a1a1a;
+  --background: #f2fbf8;
+  --foreground: #0a1f1c;
 
-  --color-navy: #101b2e;
-  --color-navy-light: #1c2c47;
-  --color-gold: #c9a227;
-  --color-gold-light: #e0bd4f;
-  --color-cream: #faf7f0;
-  --color-charcoal: #1a1a1a;
+  /* Near-black dark surface — header, hero, footer, CTA bands */
+  --color-ink: #000a0a;
+  --color-ink-light: #0f2420;
+
+  /* Bright mint-teal — dark backgrounds only, or button bg with black text */
+  --color-mint: #00e8a0;
+  --color-mint-dark: #00c98e;
+
+  /* Lime — small highlights only (icons/badges, never body text) */
+  --color-lime: #70c828;
+
+  /* Light content-section background */
+  --color-surface: #f2fbf8;
+
+  /* Body text on light backgrounds */
+  --color-charcoal: #0a1f1c;
+
+  /* Deep teal — links/accents on light backgrounds (never bright mint here) */
+  --color-teal: #007a5e;
+  --color-teal-dark: #00604a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --color-navy: var(--color-navy);
-  --color-navy-light: var(--color-navy-light);
-  --color-gold: var(--color-gold);
-  --color-gold-light: var(--color-gold-light);
-  --color-cream: var(--color-cream);
+  --color-ink: var(--color-ink);
+  --color-ink-light: var(--color-ink-light);
+  --color-mint: var(--color-mint);
+  --color-mint-dark: var(--color-mint-dark);
+  --color-lime: var(--color-lime);
+  --color-surface: var(--color-surface);
   --color-charcoal: var(--color-charcoal);
+  --color-teal: var(--color-teal);
+  --color-teal-dark: var(--color-teal-dark);
   --font-sans: var(--font-sans);
   --font-display: var(--font-display);
 }

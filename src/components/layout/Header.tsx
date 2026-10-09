@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Container from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
-import { exams, siteConfig } from "@/lib/site-config";
+import { visibleExams, siteConfig } from "@/lib/site-config";
 
 const navLinks = [
   { href: "/about", label: "About" },
@@ -17,10 +17,10 @@ export default function Header() {
   const [coursesOpen, setCoursesOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-navy/10 bg-cream/95 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/95 backdrop-blur">
       <Container className="flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-display text-lg font-bold text-navy">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-navy text-sm font-bold text-gold">
+        <Link href="/" className="flex items-center gap-2 font-display text-lg font-bold text-white">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-mint text-sm font-bold text-black">
             PP
           </span>
           <span className="hidden sm:inline">{siteConfig.name}</span>
@@ -33,7 +33,7 @@ export default function Header() {
             onMouseLeave={() => setCoursesOpen(false)}
           >
             <button
-              className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-navy hover:bg-navy/5"
+              className="flex items-center gap-1 rounded-full px-4 py-2 text-sm font-medium text-white hover:bg-white/10"
               aria-expanded={coursesOpen}
             >
               Courses
@@ -42,12 +42,12 @@ export default function Header() {
               </svg>
             </button>
             {coursesOpen && (
-              <div className="absolute left-0 top-full w-64 rounded-xl border border-navy/10 bg-white p-2 shadow-lg">
-                {exams.map((exam) => (
+              <div className="absolute left-0 top-full w-64 rounded-xl border border-white/10 bg-ink-light p-2 shadow-lg">
+                {visibleExams.map((exam) => (
                   <Link
                     key={exam.slug}
                     href={exam.hasFullCoursePage ? `/courses/${exam.slug}` : "/resources"}
-                    className="block rounded-lg px-3 py-2 text-sm text-navy hover:bg-navy/5"
+                    className="block rounded-lg px-3 py-2 text-sm text-white hover:bg-white/10"
                   >
                     {exam.name}
                   </Link>
@@ -60,19 +60,19 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="rounded-full px-4 py-2 text-sm font-medium text-navy hover:bg-navy/5"
+              className="rounded-full px-4 py-2 text-sm font-medium text-white hover:bg-white/10"
             >
               {link.label}
             </Link>
           ))}
 
           <LinkButton href={siteConfig.playStoreUrl} size="sm" className="ml-2">
-            Get the App
+            Enroll Now
           </LinkButton>
         </nav>
 
         <button
-          className="flex h-10 w-10 items-center justify-center rounded-full text-navy md:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-full text-white md:hidden"
           onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
           aria-label="Toggle menu"
@@ -88,34 +88,34 @@ export default function Header() {
       </Container>
 
       {menuOpen && (
-        <div className="border-t border-navy/10 bg-cream md:hidden">
+        <div className="border-t border-white/10 bg-ink md:hidden">
           <Container className="flex flex-col gap-1 py-3">
-            <p className="px-3 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-navy/50">
+            <p className="px-3 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-white/50">
               Courses
             </p>
-            {exams.map((exam) => (
+            {visibleExams.map((exam) => (
               <Link
                 key={exam.slug}
                 href={exam.hasFullCoursePage ? `/courses/${exam.slug}` : "/resources"}
-                className="rounded-lg px-3 py-2 text-sm text-navy hover:bg-navy/5"
+                className="rounded-lg px-3 py-2 text-sm text-white hover:bg-white/10"
                 onClick={() => setMenuOpen(false)}
               >
                 {exam.name}
               </Link>
             ))}
-            <div className="my-1 border-t border-navy/10" />
+            <div className="my-1 border-t border-white/10" />
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-navy hover:bg-navy/5"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-white hover:bg-white/10"
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
               </Link>
             ))}
             <LinkButton href={siteConfig.playStoreUrl} size="sm" className="mt-2">
-              Get the App
+              Enroll Now
             </LinkButton>
           </Container>
         </div>

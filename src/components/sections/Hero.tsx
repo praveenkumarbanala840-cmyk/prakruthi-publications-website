@@ -1,26 +1,26 @@
 import Container from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, visibleExams } from "@/lib/site-config";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-navy text-white">
+    <section className="relative overflow-hidden bg-ink text-white">
       <div
         className="pointer-events-none absolute inset-0 opacity-20"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 20% 20%, #C9A227 0%, transparent 45%), radial-gradient(circle at 80% 60%, #C9A227 0%, transparent 40%)",
+            "radial-gradient(circle at 20% 20%, #00E8A0 0%, transparent 45%), radial-gradient(circle at 80% 60%, #00E8A0 0%, transparent 40%)",
         }}
         aria-hidden="true"
       />
       <Container className="relative grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center lg:py-28">
         <div>
-          <p className="inline-block rounded-full bg-gold/15 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-gold">
-            DSC · APSET · DEO · CDPO · HWO · Gurukulalu Coaching
+          <p className="inline-block rounded-full bg-mint/15 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-mint">
+            {visibleExams.map((exam) => exam.shortName).join(" · ")} Coaching
           </p>
           <h1 className="mt-5 font-display text-4xl font-extrabold leading-tight sm:text-5xl">
             {siteConfig.stats.studentsTrained} Students Trained for
-            <span className="text-gold"> Government Exam Success</span>
+            <span className="text-mint"> Government Exam Success</span>
           </h1>
           <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
             Prakruthi Publications provides structured, exam-focused coaching
@@ -28,11 +28,11 @@ export default function Hero() {
             selection.
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
-            <LinkButton href="/courses/dsc" size="lg">
-              View Courses
+            <LinkButton href={siteConfig.playStoreUrl} size="lg">
+              Enroll Now
             </LinkButton>
-            <LinkButton href={siteConfig.playStoreUrl} variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-navy">
-              Get the App
+            <LinkButton href="/courses/tet" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-ink">
+              View Courses
             </LinkButton>
           </div>
         </div>

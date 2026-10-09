@@ -20,11 +20,11 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.domain),
   title: {
-    default: "Prakruthi Publications — DSC, APSET & Government Exam Coaching",
+    default: "Prakruthi Publications — AP TET, AP DSC & Government Exam Coaching",
     template: "%s | Prakruthi Publications",
   },
   description:
-    "Prakruthi Publications offers expert coaching for DSC, APSET, DEO, CDPO, HWO and Gurukulalu government exams in Andhra Pradesh, with 8+ years of experience and 1000+ students selected.",
+    "Prakruthi Publications offers expert coaching for AP TET, AP DSC, HWO and APSET government exams in Andhra Pradesh, with 8+ years of experience and 1000+ students selected.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -33,7 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-cream text-charcoal">
+      <body className="min-h-full flex flex-col bg-surface text-charcoal">
         <Header />
         <main className="flex-1 pb-16">{children}</main>
         <Footer />

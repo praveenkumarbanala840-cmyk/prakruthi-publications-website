@@ -76,7 +76,7 @@ export default function DscExamPatternPage() {
           <ArticleP>
             For the SGT post, the 80-mark written test splits into four parts —
             see the full breakdown on the{" "}
-            <Link href="/exams/dsc/syllabus-2026" className="font-semibold text-gold hover:underline">
+            <Link href="/exams/dsc/syllabus-2026" className="font-semibold text-teal hover:underline">
               AP DSC Syllabus 2026
             </Link>{" "}
             page.

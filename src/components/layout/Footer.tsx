@@ -1,32 +1,32 @@
 import Link from "next/link";
 import Container from "@/components/ui/Container";
-import { exams, siteConfig } from "@/lib/site-config";
+import { visibleExams, siteConfig } from "@/lib/site-config";
 
 export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-navy/10 bg-navy text-white/80">
+    <footer className="border-t border-white/10 bg-ink text-white/80">
       <Container className="grid gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
         <div>
           <div className="flex items-center gap-2 font-display text-lg font-bold text-white">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-gold text-sm font-bold text-navy">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-mint text-sm font-bold text-black">
               PP
             </span>
             {siteConfig.name}
           </div>
           <p className="mt-3 text-sm leading-relaxed">
-            Coaching for DSC, APSET, DEO, CDPO, HWO and Gurukulalu government
-            exams in Andhra Pradesh.
+            Coaching for AP TET, AP DSC, HWO and APSET government exams in
+            Andhra Pradesh.
           </p>
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wide text-gold">
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wide text-mint">
             Courses
           </h3>
           <ul className="mt-3 space-y-2 text-sm">
-            {exams.map((exam) => (
+            {visibleExams.map((exam) => (
               <li key={exam.slug}>
                 <Link
                   href={exam.hasFullCoursePage ? `/courses/${exam.slug}` : "/resources"}
@@ -40,7 +40,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wide text-gold">
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wide text-mint">
             Site
           </h3>
           <ul className="mt-3 space-y-2 text-sm">
@@ -57,7 +57,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wide text-gold">
+          <h3 className="font-display text-sm font-semibold uppercase tracking-wide text-mint">
             Contact
           </h3>
           <ul className="mt-3 space-y-2 text-sm">
