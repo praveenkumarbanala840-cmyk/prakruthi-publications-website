@@ -5,7 +5,9 @@ import { dsc } from "@/data/exams";
 import { papersByExam } from "@/data/papers";
 
 const papers = papersByExam("ap-dsc");
-const years = [...new Set(papers.map((p) => p.year))].sort((a, b) => a - b);
+const years = [...new Set(papers.map((p) => p.year).filter((y): y is number => y !== undefined))].sort(
+  (a, b) => a - b
+);
 const yearsLabel = years.join(", ");
 
 export const metadata: Metadata = {

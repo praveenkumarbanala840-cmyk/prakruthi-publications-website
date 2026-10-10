@@ -38,7 +38,8 @@ export default function TetPreviousPapersPage() {
               <div>
                 <p className="text-sm font-medium text-charcoal">{paper.title}</p>
                 <p className="text-xs text-charcoal/50">
-                  {formatDisplayDate(paper.date)} {paper.year} &middot; {paper.size} MB
+                  {paper.date ? `${formatDisplayDate(paper.date)} ${paper.year} · ` : ""}
+                  {paper.size} MB
                 </p>
               </div>
               <a

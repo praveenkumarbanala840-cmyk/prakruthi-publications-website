@@ -13,8 +13,8 @@ export const metadata: Metadata = {
       : "TS DSC Previous Papers",
   description:
     papers.length > 0
-      ? `${papers.length} official TS DSC previous question paper PDFs — unedited, sourced directly from the official portal. Also searched as TG DSC.`
-      : "Official TS DSC previous question papers will be added here as they become available. Also searched as TG DSC.",
+      ? `${papers.length} TS DSC previous question paper PDFs — unedited, with a Prakruthi cover page and footer added. Also searched as TG DSC.`
+      : "TS DSC previous question papers will be added here as they become available. Also searched as TG DSC.",
   alternates: { canonical: "/exams/ts-dsc/previous-papers" },
 };
 
@@ -26,7 +26,7 @@ export default function TsDscPreviousPapersPage() {
       availableArticleSlugs={["previous-papers"]}
       title="TS DSC Previous Papers"
       intro="Official TS DSC question papers, unedited and downloadable as-is."
-      sourceNote="Source: TS DSC official portal. Original pages unedited; Prakruthi cover page and footer added."
+      sourceNote="Original pages unedited; Prakruthi cover page and footer added."
     >
       {papers.length > 0 ? (
         <PapersExplorer papers={papers} />

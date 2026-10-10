@@ -2,6 +2,11 @@ import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { visibleExams, siteConfig } from "@/lib/site-config";
 
+function examListText() {
+  const names = visibleExams.map((exam) => exam.shortName);
+  return names.length <= 1 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+}
+
 export default function Footer() {
   const year = new Date().getFullYear();
 
@@ -16,8 +21,7 @@ export default function Footer() {
             {siteConfig.name}
           </div>
           <p className="mt-3 text-sm leading-relaxed">
-            Coaching for AP TET, AP DSC, HWO and APSET government exams in
-            Andhra Pradesh.
+            Coaching for {examListText()} government exams in Andhra Pradesh and Telangana.
           </p>
         </div>
 

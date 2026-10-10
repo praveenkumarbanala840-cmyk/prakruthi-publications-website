@@ -21,13 +21,13 @@ const groupDefs = [
   {
     exam: "ts-tet" as const,
     label: "TS TET",
-    source: "Source: TS TET official portal. Original pages unedited; Prakruthi cover page and footer added.",
+    source: "Original pages unedited; Prakruthi cover page and footer added.",
     previousPapersHref: "/exams/ts-tet/previous-papers",
   },
   {
     exam: "ts-dsc" as const,
     label: "TS DSC",
-    source: "Source: TS DSC official portal. Original pages unedited; Prakruthi cover page and footer added.",
+    source: "Original pages unedited; Prakruthi cover page and footer added.",
     previousPapersHref: "/exams/ts-dsc/previous-papers",
   },
 ];
@@ -102,7 +102,8 @@ export default function ResourcesPage() {
                       <div>
                         <p className="text-sm font-medium text-charcoal">{paper.title}</p>
                         <p className="text-xs text-charcoal/50">
-                          {formatDisplayDate(paper.date)} {paper.year} &middot; {paper.size} MB
+                          {paper.date ? `${formatDisplayDate(paper.date)} ${paper.year} · ` : ""}
+                          {paper.size} MB
                         </p>
                       </div>
                       <a

@@ -10,10 +10,10 @@
 
 export interface PreviousPaper {
   exam: "ap-tet" | "ap-dsc" | "ts-tet" | "ts-dsc" | "hwo";
-  year: number;
-  date: string; // ISO (YYYY-MM-DD)
+  year?: number; // omitted when not stated in the source file name
+  date?: string; // ISO (YYYY-MM-DD); omitted when not stated in the source file name
   title: string;
-  shift: 1 | 2 | 3;
+  shift?: 1 | 2 | 3 | "AM" | "PM"; // some exams use a morning/afternoon session instead of a numbered shift
   path: string; // public/ path to the PDF
   size: number; // MB, decimal (bytes / 1,000,000), rounded to 1 decimal
   published: boolean; // false = row/file kept, just hidden from /resources
@@ -848,9 +848,204 @@ export const dscPapers: PreviousPaper[] = [
 // Not yet available — add rows here once official PDFs are sourced.
 export const hwoPapers: PreviousPaper[] = [];
 
-// Telangana State exams — no papers sourced yet. Do not copy AP rows here.
-export const tsTetPapers: PreviousPaper[] = [];
-export const tsDscPapers: PreviousPaper[] = [];
+// Telangana State exams. Do not copy AP rows here.
+export const tsTetPapers: PreviousPaper[] = [
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-03",
+    title: "TS TET 2026 - Mathematics and Science Telugu - 3 Jan 2026, Shift 1",
+    shift: 1,
+    path: "/papers/ts-tet/ts-tet-mathematics-and-science-telugu-3-jan-2026-shift-1.pdf",
+    size: 6.5,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-03",
+    title: "TS TET 2026 - Mathematics and Science Telugu - 3 Jan 2026, Shift 2",
+    shift: 2,
+    path: "/papers/ts-tet/ts-tet-mathematics-and-science-telugu-3-jan-2026-shift-2.pdf",
+    size: 6.5,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-04",
+    title: "TS TET 2026 - Mathematics and Science Telugu - 4 Jan 2026, Shift 1",
+    shift: 1,
+    path: "/papers/ts-tet/ts-tet-mathematics-and-science-telugu-4-jan-2026-shift-1.pdf",
+    size: 6.5,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-04",
+    title: "TS TET 2026 - Mathematics and Science Telugu - 4 Jan 2026, Shift 2",
+    shift: 2,
+    path: "/papers/ts-tet/ts-tet-mathematics-and-science-telugu-4-jan-2026-shift-2.pdf",
+    size: 6.6,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-08",
+    title: "TS TET 2026 - Paper I Telugu - 8 Jan 2026, Shift 1",
+    shift: 1,
+    path: "/papers/ts-tet/ts-tet-paper-i-telugu-8-jan-2026-shift-1.pdf",
+    size: 5.9,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-08",
+    title: "TS TET 2026 - Paper I Telugu - 8 Jan 2026, Shift 2",
+    shift: 2,
+    path: "/papers/ts-tet/ts-tet-paper-i-telugu-8-jan-2026-shift-2.pdf",
+    size: 6.0,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-09",
+    title: "TS TET 2026 - Paper I Telugu - 9 Jan 2026, Shift 1",
+    shift: 1,
+    path: "/papers/ts-tet/ts-tet-paper-i-telugu-9-jan-2026-shift-1.pdf",
+    size: 6.1,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-11",
+    title: "TS TET 2026 - Paper I Telugu - 11 Jan 2026, Shift 1",
+    shift: 1,
+    path: "/papers/ts-tet/ts-tet-paper-i-telugu-11-jan-2026-shift-1.pdf",
+    size: 6.3,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-11",
+    title: "TS TET 2026 - Paper I Telugu - 11 Jan 2026, Shift 2",
+    shift: 2,
+    path: "/papers/ts-tet/ts-tet-paper-i-telugu-11-jan-2026-shift-2.pdf",
+    size: 5.8,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-05",
+    title: "TS TET 2026 - Social Telugu - 5 Jan 2026, Shift 1",
+    shift: 1,
+    path: "/papers/ts-tet/ts-tet-social-telugu-5-jan-2026-shift-1.pdf",
+    size: 7.3,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-05",
+    title: "TS TET 2026 - Social Telugu - 5 Jan 2026, Shift 2",
+    shift: 2,
+    path: "/papers/ts-tet/ts-tet-social-telugu-5-jan-2026-shift-2.pdf",
+    size: 5.0,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-06",
+    title: "TS TET 2026 - Social Telugu - 6 Jan 2026, Shift 1",
+    shift: 1,
+    path: "/papers/ts-tet/ts-tet-social-telugu-6-jan-2026-shift-1.pdf",
+    size: 7.1,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    year: 2026,
+    date: "2026-01-06",
+    title: "TS TET 2026 - Social Telugu - 6 Jan 2026, Shift 2",
+    shift: 2,
+    path: "/papers/ts-tet/ts-tet-social-telugu-6-jan-2026-shift-2.pdf",
+    size: 3.7,
+    published: true,
+  },
+];
+
+export const tsDscPapers: PreviousPaper[] = [
+  {
+    exam: "ts-dsc",
+    year: 2024,
+    date: "2024-08-05",
+    title: "TS DSC 2024 - Language Pandit Hindi - 5 Aug 2024, AM",
+    shift: "AM",
+    path: "/papers/ts-dsc/ts-dsc-language-pandit-hindi-5-aug-2024-am.pdf",
+    size: 3.3,
+    published: true,
+  },
+  {
+    // Source file name reads "2th_Aug_2024" (non-standard ordinal suffix,
+    // not "2nd") — read literally as day 2.
+    exam: "ts-dsc",
+    year: 2024,
+    date: "2024-08-02",
+    title: "TS DSC 2024 - Language Pandit Telugu - 2 Aug 2024, AM",
+    shift: "AM",
+    path: "/papers/ts-dsc/ts-dsc-language-pandit-telugu-2-aug-2024-am.pdf",
+    size: 2.5,
+    published: true,
+  },
+  {
+    exam: "ts-dsc",
+    year: 2024,
+    date: "2024-07-19",
+    title: "TS DSC 2024 - SGT - 19 Jul 2024, AM",
+    shift: "AM",
+    path: "/papers/ts-dsc/ts-dsc-sgt-19-jul-2024-am.pdf",
+    size: 4.8,
+    published: true,
+  },
+  {
+    exam: "ts-dsc",
+    year: 2024,
+    date: "2024-07-19",
+    title: "TS DSC 2024 - SGT - 19 Jul 2024, PM",
+    shift: "PM",
+    path: "/papers/ts-dsc/ts-dsc-sgt-19-jul-2024-pm.pdf",
+    size: 5.1,
+    published: true,
+  },
+  {
+    exam: "ts-dsc",
+    year: 2024,
+    date: "2024-07-23",
+    title: "TS DSC 2024 - SGT - 23 Jul 2024, AM",
+    shift: "AM",
+    path: "/papers/ts-dsc/ts-dsc-sgt-23-jul-2024-am.pdf",
+    size: 4.7,
+    published: true,
+  },
+  {
+    exam: "ts-dsc",
+    year: 2024,
+    date: "2024-07-23",
+    title: "TS DSC 2024 - SGT - 23 Jul 2024, PM",
+    shift: "PM",
+    path: "/papers/ts-dsc/ts-dsc-sgt-23-jul-2024-pm.pdf",
+    size: 5.5,
+    published: true,
+  },
+];
 
 export const allPapers: PreviousPaper[] = [
   ...tetPapers,
@@ -863,5 +1058,12 @@ export const allPapers: PreviousPaper[] = [
 export function papersByExam(exam: PreviousPaper["exam"]): PreviousPaper[] {
   return allPapers
     .filter((p) => p.exam === exam && p.published)
-    .sort((a, b) => b.date.localeCompare(a.date));
+    .sort((a, b) => {
+      // Undated papers sort after every dated paper; dated papers sort
+      // newest first.
+      if (!a.date && !b.date) return 0;
+      if (!a.date) return 1;
+      if (!b.date) return -1;
+      return b.date.localeCompare(a.date);
+    });
 }

@@ -13,8 +13,8 @@ export const metadata: Metadata = {
       : "TS TET Previous Papers",
   description:
     papers.length > 0
-      ? `${papers.length} official TS TET previous question paper PDFs — unedited, sourced directly from the official portal. Also searched as TG TET.`
-      : "Official TS TET previous question papers will be added here as they become available. Also searched as TG TET.",
+      ? `${papers.length} TS TET previous question paper PDFs — unedited, with a Prakruthi cover page and footer added. Also searched as TG TET.`
+      : "TS TET previous question papers will be added here as they become available. Also searched as TG TET.",
   alternates: { canonical: "/exams/ts-tet/previous-papers" },
 };
 
@@ -26,7 +26,7 @@ export default function TsTetPreviousPapersPage() {
       availableArticleSlugs={["previous-papers"]}
       title="TS TET Previous Papers"
       intro="Official TS TET question papers, unedited and downloadable as-is."
-      sourceNote="Source: TS TET official portal. Original pages unedited; Prakruthi cover page and footer added."
+      sourceNote="Original pages unedited; Prakruthi cover page and footer added."
     >
       {papers.length > 0 ? (
         <PapersExplorer papers={papers} />

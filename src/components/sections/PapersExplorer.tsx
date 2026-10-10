@@ -6,13 +6,15 @@ import type { PreviousPaper } from "@/data/papers";
 /**
  * Pulls the post/subject codes segment out of a title, exactly as written —
  * no guessing. Titles look like "<EXAM> <YEAR> - <codes> - <d Mon yyyy>,
- * Shift <n>" — strip the trailing date/shift (anchored at the end, so it's
- * unambiguous regardless of how many " - " the codes themselves contain),
- * then strip everything up to and including the first remaining " - "
- * (the "<EXAM> <YEAR>" prefix, whatever that exam's name happens to be).
+ * Shift <n>" or "..., AM"/"..., PM" (some exams use a morning/afternoon
+ * session instead of a numbered shift) — strip the trailing date/session
+ * (anchored at the end, so it's unambiguous regardless of how many " - "
+ * the codes themselves contain), then strip everything up to and including
+ * the first remaining " - " (the "<EXAM> <YEAR>" prefix, whatever that
+ * exam's name happens to be).
  */
 function codesFromTitle(title: string): string {
-  const withoutSuffix = title.replace(/ - \d{1,2} [A-Za-z]{3} \d{4}, Shift \d+$/, "");
+  const withoutSuffix = title.replace(/ - \d{1,2} [A-Za-z]{3} \d{4}, (?:Shift \d+|AM|PM)$/, "");
   const firstDash = withoutSuffix.indexOf(" - ");
   return firstDash === -1 ? withoutSuffix : withoutSuffix.slice(firstDash + 3);
 }
@@ -22,6 +24,8 @@ function chipFromCodes(codes: string): string {
   const idx = codes.indexOf(" - ");
   return idx === -1 ? codes : codes.slice(0, idx);
 }
+
+const NO_DATE_KEY = "__no_date__";
 
 function formatDisplayDate(iso: string) {
   const [year, month, day] = iso.split("-");
@@ -51,10 +55,15 @@ export default function PapersExplorer({ papers }: { papers: PreviousPaper[] }) 
   const groups = useMemo(() => {
     const byDate = new Map<string, PreviousPaper[]>();
     for (const p of filtered) {
-      if (!byDate.has(p.date)) byDate.set(p.date, []);
-      byDate.get(p.date)!.push(p);
+      const key = p.date ?? NO_DATE_KEY;
+      if (!byDate.has(key)) byDate.set(key, []);
+      byDate.get(key)!.push(p);
     }
-    return [...byDate.entries()].sort((a, b) => b[0].localeCompare(a[0]));
+    return [...byDate.entries()].sort((a, b) => {
+      if (a[0] === NO_DATE_KEY) return 1;
+      if (b[0] === NO_DATE_KEY) return -1;
+      return b[0].localeCompare(a[0]);
+    });
   }, [filtered]);
 
   return (
@@ -108,7 +117,7 @@ export default function PapersExplorer({ papers }: { papers: PreviousPaper[] }) 
         {groups.map(([date, datePapers]) => (
           <div key={date}>
             <h3 className="font-display text-sm font-bold uppercase tracking-wide text-charcoal/50">
-              {formatDisplayDate(date)}
+              {date === NO_DATE_KEY ? "Date not mentioned" : formatDisplayDate(date)}
             </h3>
             <ul className="mt-3 divide-y divide-charcoal/10 rounded-xl border border-charcoal/10 bg-white">
               {datePapers.map((paper) => (

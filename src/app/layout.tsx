@@ -3,8 +3,13 @@ import { Inter, Poppins } from "next/font/google";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import StickyBottomCTA from "@/components/layout/StickyBottomCTA";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, visibleExams } from "@/lib/site-config";
 import "./globals.css";
+
+function examListText() {
+  const names = visibleExams.map((exam) => exam.shortName);
+  return names.length <= 1 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`;
+}
 
 const inter = Inter({
   variable: "--font-sans",
@@ -23,8 +28,7 @@ export const metadata: Metadata = {
     default: "Prakruthi Publications — AP TET, AP DSC & Government Exam Coaching",
     template: "%s | Prakruthi Publications",
   },
-  description:
-    "Prakruthi Publications offers expert coaching for AP TET, AP DSC, HWO and APSET government exams in Andhra Pradesh, with 8+ years of experience and 1000+ students selected.",
+  description: `Prakruthi Publications offers expert coaching for ${examListText()} government exams in Andhra Pradesh and Telangana, with 8+ years of experience and 1000+ students selected.`,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
