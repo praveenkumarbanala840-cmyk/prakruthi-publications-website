@@ -27,7 +27,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - Paper IIA LAN Telugu - 5 Aug 2026, Shift 1",
     shift: 1,
     path: "/papers/tet/ap-tet-paper-iia-lan-telugu-05th-aug-2026-shift-1.pdf",
-    size: 4.9,
+    size: 4.3,
     published: true,
   },
   {
@@ -37,7 +37,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - Paper IIA LAN Telugu - 5 Aug 2026, Shift 2",
     shift: 2,
     path: "/papers/tet/ap-tet-paper-iia-lan-telugu-05th-aug-2026-shift-2.pdf",
-    size: 5.7,
+    size: 5.1,
     published: true,
   },
   {
@@ -47,7 +47,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - IIA LAN Telugu - 6 Aug 2026, Shift 1",
     shift: 1,
     path: "/papers/tet/ap-tet-iia-lan-telugu-06th-aug-2026-shift-1.pdf",
-    size: 5.1,
+    size: 4.5,
     published: true,
   },
   {
@@ -57,7 +57,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - IIA LAN Telugu Sanskrit - 6 Aug 2026, Shift 1",
     shift: 1,
     path: "/papers/tet/ap-tet-iia-lan-telugu-sanskrit-06th-aug-2026-shift-1.pdf",
-    size: 5.1,
+    size: 4.5,
     published: false,
   },
   {
@@ -67,7 +67,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - IIA Telugu Hindi - 6 Aug 2026, Shift 1",
     shift: 1,
     path: "/papers/tet/ap-tet-iia-telugu-hindi-06th-aug-2026-shift-1.pdf",
-    size: 4.9,
+    size: 4.3,
     published: false,
   },
   {
@@ -77,7 +77,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - Paper IIA LAN Telugu Urdu - 6 Aug 2026, Shift 1",
     shift: 1,
     path: "/papers/tet/ap-tet-paper-iia-lan-telugu-urdu-06th-aug-2026-shift1.pdf",
-    size: 4.8,
+    size: 4.2,
     published: false,
   },
   {
@@ -87,7 +87,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - SGT IA Telugu - 6 Aug 2026, Shift 2",
     shift: 2,
     path: "/papers/tet/ap-tet-sgt-ia-telugu-06th-aug-2026-shift-2.pdf",
-    size: 5.8,
+    size: 5.2,
     published: true,
   },
   {
@@ -97,7 +97,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - SGT IA Telugu - 7 Aug 2026, Shift 1",
     shift: 1,
     path: "/papers/tet/ap-tet-sgt-ia-telugu-07th-aug-2026-shift-1.pdf",
-    size: 5.3,
+    size: 4.6,
     published: true,
   },
   {
@@ -107,7 +107,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - SGT 1A Telugu - 7 Aug 2026, Shift 2",
     shift: 2,
     path: "/papers/tet/ap-tet-sgt-1a-telugu-07th-aug-2026-shift-2.pdf",
-    size: 6.1,
+    size: 5.4,
     published: true,
   },
   {
@@ -117,7 +117,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - SGT IA Telugu - 8 Aug 2026, Shift 1",
     shift: 1,
     path: "/papers/tet/ap-tet-sgt-ia-telugu-08th-aug-2026-shift-1.pdf",
-    size: 6.1,
+    size: 5.4,
     published: true,
   },
   {
@@ -127,7 +127,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - SGT IA Telugu - 8 Aug 2026, Shift 2",
     shift: 2,
     path: "/papers/tet/ap-tet-sgt-ia-telugu-08th-aug-2026-shift-2.pdf",
-    size: 5.7,
+    size: 5.1,
     published: true,
   },
   {
@@ -137,7 +137,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - SGT IA Telugu - 9 Aug 2026, Shift 1",
     shift: 1,
     path: "/papers/tet/ap-tet-sgt-ia-telugu-09th-aug-2026-shift-1.pdf",
-    size: 6.0,
+    size: 5.4,
     published: true,
   },
   {
@@ -147,7 +147,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - SGT IA Telugu - 9 Aug 2026, Shift 2",
     shift: 2,
     path: "/papers/tet/ap-tet-sgt-ia-telugu-09th-aug-2026-shift-2.pdf",
-    size: 6.2,
+    size: 5.6,
     published: true,
   },
   {
@@ -167,7 +167,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - Paper IIA SS Telugu - 10 Aug 2026, Shift 2",
     shift: 2,
     path: "/papers/tet/ap-tet-paper-iia-ss-telugu-10th-aug-2026-shift-2.pdf",
-    size: 6.3,
+    size: 5.7,
     published: true,
   },
   {
@@ -177,7 +177,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - Paper IIA SS Telugu - 11 Aug 2026, Shift 1",
     shift: 1,
     path: "/papers/tet/ap-tet-paper-iia-ss-telugu-11th-aug-2026-shift-1.pdf",
-    size: 6.0,
+    size: 5.4,
     published: true,
   },
   {
@@ -187,7 +187,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - Paper II A SS Telugu - 11 Aug 2026, Shift 2",
     shift: 2,
     path: "/papers/tet/ap-tet-paper-ii-a-ss-telugu-11th-aug-2026-shift-2.pdf",
-    size: 6.0,
+    size: 5.4,
     published: true,
   },
   {
@@ -197,7 +197,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - Paper IIA MS Telugu - 12 Aug 2026, Shift 2",
     shift: 2,
     path: "/papers/tet/ap-tet-paper-iia-ms-telugu-12th-aug-2026-shift-2.pdf",
-    size: 6.0,
+    size: 5.4,
     published: true,
   },
   {
@@ -207,7 +207,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - Paper IIA MS Telugu - 13 Aug 2026, Shift 1",
     shift: 1,
     path: "/papers/tet/ap-tet-paper-iia-ms-telugu-13th-aug-2026-shift-1.pdf",
-    size: 6.4,
+    size: 5.7,
     published: true,
   },
   {
@@ -217,7 +217,7 @@ export const tetPapers: PreviousPaper[] = [
     title: "AP TET 2026 - Paper IIA MS Telugu - 14 Aug 2026, Shift 2",
     shift: 2,
     path: "/papers/tet/ap-tet-paper-iia-ms-telugu-14th-aug-2026-shift-2.pdf",
-    size: 5.8,
+    size: 5.2,
     published: true,
   },
 ];

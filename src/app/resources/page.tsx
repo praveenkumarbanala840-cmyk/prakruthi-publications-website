@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const groups = [
-  { exam: "tet" as const, label: "AP TET", source: "Source: AP TET official portal, unedited." },
+  { exam: "tet" as const, label: "AP TET", source: "Source: AP TET official portal. Original pages unedited; Prakruthi cover page and footer added." },
   { exam: "dsc" as const, label: "AP DSC", source: "Source: AP DSC official portal, unedited." },
   { exam: "hwo" as const, label: "AP HWO", source: "Source: AP HWO official portal, unedited." },
 ];

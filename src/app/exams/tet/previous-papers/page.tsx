@@ -26,7 +26,7 @@ export default function TetPreviousPapersPage() {
       availableArticleSlugs={["previous-papers"]}
       title="AP TET Previous Papers — Download"
       intro="Official AP TET question papers, unedited and downloadable as-is."
-      sourceNote="Source: AP TET official portal, unedited."
+      sourceNote="Source: AP TET official portal. Original pages unedited; Prakruthi cover page and footer added."
     >
       {papers.length > 0 ? (
         <ul className="divide-y divide-charcoal/10 rounded-xl border border-charcoal/10 bg-white">
