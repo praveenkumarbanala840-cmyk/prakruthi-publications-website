@@ -3,7 +3,7 @@ import Container from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
 import TestimonialCarousel from "@/components/sections/TestimonialCarousel";
 import ClickToLoadVideo from "@/components/ui/ClickToLoadVideo";
-import CourseOverviewPapers from "@/components/sections/CourseOverviewPapers";
+import CourseOverviewPapers, { getPapers } from "@/components/sections/CourseOverviewPapers";
 import ShortsRow from "@/components/sections/ShortsRow";
 import ReviewsCarousel from "@/components/sections/ReviewsCarousel";
 import PriceOfferSection from "@/components/sections/PriceOfferSection";
@@ -13,10 +13,13 @@ import type { ExamContent } from "@/data/types";
 
 export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
   const richHero = Boolean(exam.heroHeadline);
-  const secondaryCta = exam.heroSecondaryCta ?? {
-    label: "WhatsApp Enquiry",
-    href: whatsappLink(`Hi, I'd like details about the ${exam.shortName} course.`),
-  };
+  const hasPreviousPapers =
+    exam.availableArticles.includes("previous-papers") && getPapers(exam.slug).length > 0;
+  const secondaryCta =
+    exam.heroSecondaryCta ??
+    (hasPreviousPapers
+      ? { label: "Previous Papers", href: `/exams/${exam.slug}/previous-papers` }
+      : { label: "WhatsApp Enquiry", href: whatsappLink(`Hi, I'd like details about the ${exam.shortName} course.`) });
 
   return (
     <>

@@ -5,7 +5,7 @@ import type { ExamContent } from "@/data/types";
 
 const PAPER_EXAM_SLUGS = ["tet", "dsc", "hwo"] as const;
 
-function getPapers(slug: string) {
+export function getPapers(slug: string) {
   return (PAPER_EXAM_SLUGS as readonly string[]).includes(slug)
     ? papersByExam(slug as (typeof PAPER_EXAM_SLUGS)[number])
     : [];

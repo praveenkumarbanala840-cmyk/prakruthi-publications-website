@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Container from "@/components/ui/Container";
 import { papersByExam } from "@/data/papers";
 
@@ -10,9 +11,24 @@ export const metadata: Metadata = {
 };
 
 const groups = [
-  { exam: "tet" as const, label: "AP TET", source: "Source: AP TET official portal. Original pages unedited; Prakruthi cover page and footer added." },
-  { exam: "dsc" as const, label: "AP DSC", source: "Source: AP DSC official portal, unedited." },
-  { exam: "hwo" as const, label: "AP HWO", source: "Source: AP HWO official portal, unedited." },
+  {
+    exam: "tet" as const,
+    label: "AP TET",
+    source: "Source: AP TET official portal. Original pages unedited; Prakruthi cover page and footer added.",
+    summaryHref: null,
+  },
+  {
+    exam: "dsc" as const,
+    label: "AP DSC",
+    source: "Source: AP DSC official portal. Original pages unedited; Prakruthi cover page and footer added.",
+    summaryHref: "/exams/dsc/previous-papers",
+  },
+  {
+    exam: "hwo" as const,
+    label: "AP HWO",
+    source: "Source: AP HWO official portal, unedited.",
+    summaryHref: null,
+  },
 ];
 
 function formatDisplayDate(iso: string) {
@@ -46,7 +62,26 @@ export default function ResourcesPage() {
                   <p className="text-xs text-charcoal/50">{group.source}</p>
                 </div>
 
-                {papers.length > 0 ? (
+                {papers.length === 0 ? (
+                  <div className="mt-4 rounded-xl border border-dashed border-charcoal/20 bg-white/60 p-6 text-center">
+                    <p className="text-sm text-charcoal/60">Coming soon</p>
+                  </div>
+                ) : group.summaryHref ? (
+                  <Link
+                    href={group.summaryHref}
+                    className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-charcoal/10 bg-white p-5 transition-colors hover:border-teal"
+                  >
+                    <div>
+                      <p className="font-display font-bold text-charcoal">
+                        {group.label} &mdash; {papers.length} papers
+                      </p>
+                      <p className="mt-1 text-sm text-charcoal/60">
+                        Search, filter, and download every paper
+                      </p>
+                    </div>
+                    <span className="shrink-0 text-sm font-semibold text-teal">View all &rarr;</span>
+                  </Link>
+                ) : (
                   <ul className="mt-4 divide-y divide-charcoal/10 rounded-xl border border-charcoal/10 bg-white">
                     {papers.map((paper) => (
                       <li
@@ -69,10 +104,6 @@ export default function ResourcesPage() {
                       </li>
                     ))}
                   </ul>
-                ) : (
-                  <div className="mt-4 rounded-xl border border-dashed border-charcoal/20 bg-white/60 p-6 text-center">
-                    <p className="text-sm text-charcoal/60">Coming soon</p>
-                  </div>
                 )}
               </div>
             );
