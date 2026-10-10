@@ -191,15 +191,27 @@ export async function brandPdf({ inputPath, outputPath, meta }) {
   }
   y -= 10;
 
-  drawCentered(cover, `${meta.dayNum} ${meta.monthLabel} ${meta.year}  ·  Shift ${meta.shift}`, {
-    y,
-    size: 13,
-    font: regularFont,
-    color: teal,
-  });
-  y -= 50;
+  // Callers that don't have a reliable day/month/year/shift (meta omits
+  // them rather than guessing) skip this line entirely instead of printing
+  // "undefined".
+  const hasDateShift = meta.dayNum != null && meta.monthLabel && meta.year && meta.shift != null;
+  if (hasDateShift) {
+    drawCentered(cover, `${meta.dayNum} ${meta.monthLabel} ${meta.year}  ·  Shift ${meta.shift}`, {
+      y,
+      size: 13,
+      font: regularFont,
+      color: teal,
+    });
+    y -= 50;
+  } else {
+    y -= 20;
+  }
 
-  const sourceLine = `Source: AP ${meta.examBadge} official portal. Original question paper follows, unedited.`;
+  // meta.sourceLine lets a caller override the default AP "official
+  // portal" wording (e.g. when that claim hasn't been confirmed for the
+  // exam being branded).
+  const sourceLine =
+    meta.sourceLine ?? `Source: AP ${meta.examBadge} official portal. Original question paper follows, unedited.`;
   for (const line of wrapText(sourceLine, regularFont, 11, CONTENT_WIDTH)) {
     drawCentered(cover, line, { y, size: 11, font: regularFont, color: gray });
     y -= 16;
