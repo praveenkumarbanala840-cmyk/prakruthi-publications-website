@@ -14,6 +14,7 @@ export interface PreviousPaper {
   date?: string; // ISO (YYYY-MM-DD); omitted when not stated in the source file name
   title: string;
   shift?: 1 | 2 | 3 | "AM" | "PM"; // some exams use a morning/afternoon session instead of a numbered shift
+  group?: string; // explicit group label for the previous-papers page (overrides date-based grouping); e.g. "Consolidated Key Path"
   path: string; // public/ path to the PDF
   size: number; // MB, decimal (bytes / 1,000,000), rounded to 1 decimal
   published: boolean; // false = row/file kept, just hidden from /resources
@@ -980,6 +981,46 @@ export const tsTetPapers: PreviousPaper[] = [
     size: 3.7,
     published: true,
   },
+  {
+    exam: "ts-tet",
+    title: "TS TET - Consolidated Key Path (5)",
+    group: "Consolidated Key Path",
+    path: "/papers/ts-tet/ts-tet-consolidated-key-path-5.pdf",
+    size: 4.4,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    title: "TS TET - Consolidated Key Path (6)",
+    group: "Consolidated Key Path",
+    path: "/papers/ts-tet/ts-tet-consolidated-key-path-6.pdf",
+    size: 4.2,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    title: "TS TET - Consolidated Key Path (7)",
+    group: "Consolidated Key Path",
+    path: "/papers/ts-tet/ts-tet-consolidated-key-path-7.pdf",
+    size: 3.6,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    title: "TS TET - Consolidated Key Path (8)",
+    group: "Consolidated Key Path",
+    path: "/papers/ts-tet/ts-tet-consolidated-key-path-8.pdf",
+    size: 5.7,
+    published: true,
+  },
+  {
+    exam: "ts-tet",
+    title: "TS TET - Consolidated Key Path (9)",
+    group: "Consolidated Key Path",
+    path: "/papers/ts-tet/ts-tet-consolidated-key-path-9.pdf",
+    size: 5.6,
+    published: true,
+  },
 ];
 
 export const tsDscPapers: PreviousPaper[] = [
@@ -994,8 +1035,6 @@ export const tsDscPapers: PreviousPaper[] = [
     published: true,
   },
   {
-    // Source file name reads "2th_Aug_2024" (non-standard ordinal suffix,
-    // not "2nd") — read literally as day 2.
     exam: "ts-dsc",
     year: 2024,
     date: "2024-08-02",

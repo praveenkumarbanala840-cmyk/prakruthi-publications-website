@@ -19,13 +19,20 @@ function codesFromTitle(title: string): string {
   return firstDash === -1 ? withoutSuffix : withoutSuffix.slice(firstDash + 3);
 }
 
-/** The first " - "-delimited segment of the codes, used as the filter-chip value. */
+/**
+ * The first " - "-delimited segment of the codes, used as the filter-chip
+ * value. A trailing " (N)" (e.g. distinguishing otherwise-identical
+ * documents numbered within a set) is stripped so they collapse into one
+ * chip instead of one per number.
+ */
 function chipFromCodes(codes: string): string {
   const idx = codes.indexOf(" - ");
-  return idx === -1 ? codes : codes.slice(0, idx);
+  const chip = idx === -1 ? codes : codes.slice(0, idx);
+  return chip.replace(/ \(\d+\)$/, "");
 }
 
 const NO_DATE_KEY = "__no_date__";
+const ISO_DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
 
 function formatDisplayDate(iso: string) {
   const [year, month, day] = iso.split("-");
@@ -53,16 +60,23 @@ export default function PapersExplorer({ papers }: { papers: PreviousPaper[] }) 
   }, [papers, query, activeChip]);
 
   const groups = useMemo(() => {
-    const byDate = new Map<string, PreviousPaper[]>();
+    // Grouping key: an explicit p.group (e.g. "Consolidated Key Path")
+    // always wins over the date, so those entries never fall into "Date
+    // not mentioned" even though they also have no date.
+    const byKey = new Map<string, PreviousPaper[]>();
     for (const p of filtered) {
-      const key = p.date ?? NO_DATE_KEY;
-      if (!byDate.has(key)) byDate.set(key, []);
-      byDate.get(key)!.push(p);
+      const key = p.group ?? p.date ?? NO_DATE_KEY;
+      if (!byKey.has(key)) byKey.set(key, []);
+      byKey.get(key)!.push(p);
     }
-    return [...byDate.entries()].sort((a, b) => {
-      if (a[0] === NO_DATE_KEY) return 1;
+    return [...byKey.entries()].sort((a, b) => {
+      const aIsDate = ISO_DATE_RE.test(a[0]);
+      const bIsDate = ISO_DATE_RE.test(b[0]);
+      if (aIsDate && bIsDate) return b[0].localeCompare(a[0]); // newest first
+      if (aIsDate !== bIsDate) return aIsDate ? -1 : 1; // dated groups before any non-dated group
+      if (a[0] === NO_DATE_KEY) return 1; // "Date not mentioned" always last
       if (b[0] === NO_DATE_KEY) return -1;
-      return b[0].localeCompare(a[0]);
+      return 0; // named groups keep their relative (stable-sort) order
     });
   }, [filtered]);
 
@@ -114,13 +128,13 @@ export default function PapersExplorer({ papers }: { papers: PreviousPaper[] }) 
         {groups.length === 0 && (
           <p className="text-sm text-charcoal/60">No papers match your search.</p>
         )}
-        {groups.map(([date, datePapers]) => (
-          <div key={date}>
+        {groups.map(([key, groupPapers]) => (
+          <div key={key}>
             <h3 className="font-display text-sm font-bold uppercase tracking-wide text-charcoal/50">
-              {date === NO_DATE_KEY ? "Date not mentioned" : formatDisplayDate(date)}
+              {key === NO_DATE_KEY ? "Date not mentioned" : ISO_DATE_RE.test(key) ? formatDisplayDate(key) : key}
             </h3>
             <ul className="mt-3 divide-y divide-charcoal/10 rounded-xl border border-charcoal/10 bg-white">
-              {datePapers.map((paper) => (
+              {groupPapers.map((paper) => (
                 <li
                   key={paper.path}
                   className="flex flex-wrap items-center justify-between gap-3 px-4 py-3"
