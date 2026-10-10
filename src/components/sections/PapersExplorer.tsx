@@ -3,12 +3,18 @@
 import { useMemo, useState } from "react";
 import type { PreviousPaper } from "@/data/papers";
 
-const TITLE_PATTERN = /^AP DSC \d{4} - (.+) - \d{1,2} [A-Za-z]{3} \d{4}, Shift \d+$/;
-
-/** Pulls the post/subject codes segment out of a title, exactly as written — no guessing. */
+/**
+ * Pulls the post/subject codes segment out of a title, exactly as written —
+ * no guessing. Titles look like "<EXAM> <YEAR> - <codes> - <d Mon yyyy>,
+ * Shift <n>" — strip the trailing date/shift (anchored at the end, so it's
+ * unambiguous regardless of how many " - " the codes themselves contain),
+ * then strip everything up to and including the first remaining " - "
+ * (the "<EXAM> <YEAR>" prefix, whatever that exam's name happens to be).
+ */
 function codesFromTitle(title: string): string {
-  const match = title.match(TITLE_PATTERN);
-  return match ? match[1] : title;
+  const withoutSuffix = title.replace(/ - \d{1,2} [A-Za-z]{3} \d{4}, Shift \d+$/, "");
+  const firstDash = withoutSuffix.indexOf(" - ");
+  return firstDash === -1 ? withoutSuffix : withoutSuffix.slice(firstDash + 3);
 }
 
 /** The first " - "-delimited segment of the codes, used as the filter-chip value. */
@@ -23,7 +29,7 @@ function formatDisplayDate(iso: string) {
   return `${parseInt(day, 10)} ${months[parseInt(month, 10) - 1]} ${year}`;
 }
 
-export default function DscPapersExplorer({ papers }: { papers: PreviousPaper[] }) {
+export default function PapersExplorer({ papers }: { papers: PreviousPaper[] }) {
   const [query, setQuery] = useState("");
   const [activeChip, setActiveChip] = useState<string | null>(null);
 

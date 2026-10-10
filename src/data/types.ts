@@ -82,6 +82,13 @@ export interface ExamContent {
   reviews?: Review[];
   price?: CoursePrice;
   offer?: CourseOffer;
+
+  // When true, CoursePageTemplate renders only the hero, credibility block,
+  // how-to-enroll strip, related-articles, and final CTA — no batch-timings
+  // placeholder, testimonials placeholder, FAQ placeholder, or price/offer
+  // section. For exams with no real content of any kind yet (so the page
+  // never shows a "finalized soon" box for content that was never promised).
+  minimalCourse?: boolean;
 }
 
 /** Placeholder content-data shell for an exam not yet filled in by the client. */

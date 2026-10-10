@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   title: "AP DSC Exam Pattern 2026 — Marks, Duration & Selection Process",
   description:
     "AP DSC exam pattern 2026: written test structure, marks, duration, negative marking policy, and how the AP TET score factors into final selection.",
-  alternates: { canonical: "/exams/dsc/exam-pattern" },
+  alternates: { canonical: "/exams/ap-dsc/exam-pattern" },
 };
 
 export default function DscExamPatternPage() {
@@ -76,7 +76,7 @@ export default function DscExamPatternPage() {
           <ArticleP>
             For the SGT post, the 80-mark written test splits into four parts —
             see the full breakdown on the{" "}
-            <Link href="/exams/dsc/syllabus-2026" className="font-semibold text-teal hover:underline">
+            <Link href="/exams/ap-dsc/syllabus-2026" className="font-semibold text-teal hover:underline">
               AP DSC Syllabus 2026
             </Link>{" "}
             page.

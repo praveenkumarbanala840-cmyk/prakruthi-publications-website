@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "AP DSC Syllabus 2026 — Subject-Wise Breakdown",
   description:
     "AP DSC Syllabus 2026 subject-wise breakdown for SGT and School Assistant posts — General Knowledge, Perspectives in Education, Educational Psychology, and Content & Methodology, with official marks weightage.",
-  alternates: { canonical: "/exams/dsc/syllabus-2026" },
+  alternates: { canonical: "/exams/ap-dsc/syllabus-2026" },
 };
 
 export default function DscSyllabusPage() {

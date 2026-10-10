@@ -3,7 +3,7 @@ import Container from "@/components/ui/Container";
 import { papersByExam } from "@/data/papers";
 import type { ExamContent } from "@/data/types";
 
-const PAPER_EXAM_SLUGS = ["tet", "dsc", "hwo"] as const;
+const PAPER_EXAM_SLUGS = ["ap-tet", "ap-dsc", "ts-tet", "ts-dsc", "hwo"] as const;
 
 export function getPapers(slug: string) {
   return (PAPER_EXAM_SLUGS as readonly string[]).includes(slug)
@@ -45,7 +45,7 @@ export default function CourseOverviewPapers({ exam }: { exam: ExamContent }) {
 
           <div className="rounded-2xl border border-charcoal/10 bg-surface p-6">
             <h3 className="font-display text-lg font-bold text-charcoal">
-              Free: AP {exam.shortName} Previous Papers
+              Free: {exam.shortName} Previous Papers
             </h3>
             {papers.length > 0 ? (
               <ul className="mt-4 divide-y divide-charcoal/10">

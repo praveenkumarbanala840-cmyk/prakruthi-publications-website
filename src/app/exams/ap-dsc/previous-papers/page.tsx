@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import ArticlePageTemplate from "@/components/templates/ArticlePageTemplate";
-import DscPapersExplorer from "@/components/sections/DscPapersExplorer";
+import PapersExplorer from "@/components/sections/PapersExplorer";
 import { dsc } from "@/data/exams";
 import { papersByExam } from "@/data/papers";
 
-const papers = papersByExam("dsc");
+const papers = papersByExam("ap-dsc");
 const years = [...new Set(papers.map((p) => p.year))].sort((a, b) => a - b);
 const yearsLabel = years.join(", ");
 
 export const metadata: Metadata = {
   title: `AP DSC Previous Papers (${yearsLabel}) — ${papers.length} Papers`,
   description: `${papers.length} official AP DSC previous question paper PDFs from ${yearsLabel} — unedited, sourced directly from the official AP DSC portal.`,
-  alternates: { canonical: "/exams/dsc/previous-papers" },
+  alternates: { canonical: "/exams/ap-dsc/previous-papers" },
 };
 
 export default function DscPreviousPapersPage() {
@@ -25,7 +25,7 @@ export default function DscPreviousPapersPage() {
       sourceNote="Source: AP DSC official portal. Original pages unedited; Prakruthi cover page and footer added."
     >
       {papers.length > 0 ? (
-        <DscPapersExplorer papers={papers} />
+        <PapersExplorer papers={papers} />
       ) : (
         <div className="rounded-2xl border border-dashed border-charcoal/20 bg-white/60 p-8 text-center">
           <p className="text-sm text-charcoal/60">Papers are being added.</p>

@@ -5,14 +5,14 @@ import { emptyExamContent, type ExamContent } from "@/data/types";
 // nothing below is invented; empty fields render as hidden sections or
 // honest "coming soon" placeholders.
 export const tet: ExamContent = {
-  ...emptyExamContent("tet", "AP TET - Teacher Eligibility Test", "TET"),
+  ...emptyExamContent("ap-tet", "AP TET - Teacher Eligibility Test", "AP TET"),
 
   // Only syllabus-2026 and exam-pattern are deliberately omitted — TET has
   // no syllabus/exam-pattern article pages yet (see build instructions).
   availableArticles: ["previous-papers"],
 
   heroHeadline: "AP TET 2026 - Psychology with GS Rao",
-  heroSecondaryCta: { label: "Previous Papers", href: "/exams/tet/previous-papers" },
+  heroSecondaryCta: { label: "Previous Papers", href: "/exams/ap-tet/previous-papers" },
 
   // TODO(professor): YouTube video ID for the course intro video.
   // introVideo: { youtubeId: "", title: "" },

@@ -11,7 +11,7 @@ export default function CoursesPreview() {
             Choose Your Exam
           </h2>
           <p className="mt-3 text-sm text-charcoal/60 sm:text-base">
-            Structured courses for every major Andhra Pradesh government exam.
+            Structured courses for major Andhra Pradesh and Telangana government exams.
           </p>
         </div>
 
@@ -24,7 +24,7 @@ export default function CoursesPreview() {
                 href={href}
                 className="group flex flex-col rounded-2xl border border-charcoal/10 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-teal hover:shadow-md"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-charcoal/5 font-display text-sm font-bold text-charcoal group-hover:bg-teal/10 group-hover:text-teal">
+                <div className="flex h-12 w-fit min-w-12 items-center justify-center rounded-xl bg-charcoal/5 px-2 font-display text-xs font-bold text-charcoal group-hover:bg-teal/10 group-hover:text-teal">
                   {exam.badge}
                 </div>
                 <h3 className="mt-4 font-display text-lg font-bold text-charcoal">

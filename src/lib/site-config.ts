@@ -51,13 +51,15 @@ export interface ExamNavItem {
 // — no other code changes needed (Header/Footer/CoursesPreview all derive
 // from visibleExams below).
 export const exams: ExamNavItem[] = [
-  { slug: "tet", name: "AP TET - Teacher Eligibility Test", shortName: "TET", badge: "TET", hasFullCoursePage: true, order: 1, visible: true },
-  { slug: "dsc", name: "AP DSC — Andhra Pradesh District Selection Committee", shortName: "DSC", badge: "DSC", hasFullCoursePage: true, order: 2, visible: true },
-  { slug: "hwo", name: "HWO — Health & Welfare Officer", shortName: "HWO", badge: "HWO", hasFullCoursePage: true, order: 3, visible: true },
-  { slug: "apset", name: "APSET", shortName: "APSET", badge: "SET", hasFullCoursePage: true, order: 4, visible: true },
-  { slug: "deo", name: "DEO — District Education Officer", shortName: "DEO", badge: "DEO", hasFullCoursePage: true, order: 5, visible: false },
-  { slug: "cdpo", name: "CDPO — Child Development Project Officer", shortName: "CDPO", badge: "CDPO", hasFullCoursePage: true, order: 6, visible: false },
-  { slug: "gurukulalu", name: "Gurukulalu", shortName: "Gurukulalu", badge: "GKL", hasFullCoursePage: false, order: 7, visible: false },
+  { slug: "ap-tet", name: "AP TET - Teacher Eligibility Test", shortName: "AP TET", badge: "AP TET", hasFullCoursePage: true, order: 1, visible: true },
+  { slug: "ap-dsc", name: "AP DSC — Andhra Pradesh District Selection Committee", shortName: "AP DSC", badge: "AP DSC", hasFullCoursePage: true, order: 2, visible: true },
+  { slug: "ts-tet", name: "TS TET - Telangana State Teacher Eligibility Test", shortName: "TS TET", badge: "TS TET", hasFullCoursePage: true, order: 3, visible: true },
+  { slug: "ts-dsc", name: "TS DSC - Telangana State District Selection Committee", shortName: "TS DSC", badge: "TS DSC", hasFullCoursePage: true, order: 4, visible: true },
+  { slug: "hwo", name: "HWO — Health & Welfare Officer", shortName: "HWO", badge: "HWO", hasFullCoursePage: true, order: 5, visible: false },
+  { slug: "apset", name: "APSET", shortName: "APSET", badge: "SET", hasFullCoursePage: true, order: 6, visible: false },
+  { slug: "deo", name: "DEO — District Education Officer", shortName: "DEO", badge: "DEO", hasFullCoursePage: true, order: 7, visible: false },
+  { slug: "cdpo", name: "CDPO — Child Development Project Officer", shortName: "CDPO", badge: "CDPO", hasFullCoursePage: true, order: 8, visible: false },
+  { slug: "gurukulalu", name: "Gurukulalu", shortName: "Gurukulalu", badge: "GKL", hasFullCoursePage: false, order: 9, visible: false },
 ];
 
 export const visibleExams: ExamNavItem[] = [...exams]

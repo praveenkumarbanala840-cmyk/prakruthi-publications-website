@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "AP TET Previous Papers — Download",
   description:
     "Official AP TET previous question paper PDFs — unedited, sourced directly from the official AP TET portal.",
-  alternates: { canonical: "/exams/tet/previous-papers" },
+  alternates: { canonical: "/exams/ap-tet/previous-papers" },
 };
 
 function formatDisplayDate(iso: string) {
@@ -17,7 +17,7 @@ function formatDisplayDate(iso: string) {
 }
 
 export default function TetPreviousPapersPage() {
-  const papers = papersByExam("tet");
+  const papers = papersByExam("ap-tet");
 
   return (
     <ArticlePageTemplate

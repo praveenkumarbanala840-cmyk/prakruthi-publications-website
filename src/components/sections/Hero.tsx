@@ -31,7 +31,7 @@ export default function Hero() {
             <LinkButton href={siteConfig.playStoreUrl} size="lg">
               Enroll Now
             </LinkButton>
-            <LinkButton href="/courses/tet" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-ink">
+            <LinkButton href="/courses/ap-tet" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-ink">
               View Courses
             </LinkButton>
           </div>

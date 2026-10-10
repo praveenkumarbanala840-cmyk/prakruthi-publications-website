@@ -155,103 +155,109 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
         </section>
       )}
 
-      {/* Batch timings and fees */}
-      <section className="bg-white py-16">
-        <Container>
-          <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
-            Batch Timings &amp; Fees
-          </h2>
-          {exam.batches.length > 0 ? (
-            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-              {exam.batches.map((batch, i) => (
-                <div key={i} className="rounded-2xl border border-charcoal/10 bg-surface p-6">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-teal">{batch.mode}</p>
-                  <p className="mt-2 font-display text-lg font-bold text-charcoal">{batch.timing}</p>
-                  <p className="mt-1 text-sm text-charcoal/70">{batch.fee}</p>
-                  {batch.startDate && (
-                    <p className="mt-2 text-xs text-charcoal/60">Starts {batch.startDate}</p>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="mt-8 rounded-2xl border border-dashed border-charcoal/20 bg-surface p-8 text-center">
-              <p className="text-sm text-charcoal/60">
-                Batch schedule and fees are being finalized — message us on WhatsApp for the latest information.
-              </p>
-              <LinkButton
-                href={whatsappLink(`Hi, I'd like to know the batch timings and fees for ${exam.shortName}.`)}
-                variant="secondary"
-                size="sm"
-                className="mt-4"
-              >
-                Ask on WhatsApp
-              </LinkButton>
-            </div>
-          )}
-        </Container>
-      </section>
+      {/* Batch timings and fees — omitted entirely for minimal (no-data-yet) exams */}
+      {!exam.minimalCourse && (
+        <section className="bg-white py-16">
+          <Container>
+            <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
+              Batch Timings &amp; Fees
+            </h2>
+            {exam.batches.length > 0 ? (
+              <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                {exam.batches.map((batch, i) => (
+                  <div key={i} className="rounded-2xl border border-charcoal/10 bg-surface p-6">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-teal">{batch.mode}</p>
+                    <p className="mt-2 font-display text-lg font-bold text-charcoal">{batch.timing}</p>
+                    <p className="mt-1 text-sm text-charcoal/70">{batch.fee}</p>
+                    {batch.startDate && (
+                      <p className="mt-2 text-xs text-charcoal/60">Starts {batch.startDate}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-8 rounded-2xl border border-dashed border-charcoal/20 bg-surface p-8 text-center">
+                <p className="text-sm text-charcoal/60">
+                  Batch schedule and fees are being finalized — message us on WhatsApp for the latest information.
+                </p>
+                <LinkButton
+                  href={whatsappLink(`Hi, I'd like to know the batch timings and fees for ${exam.shortName}.`)}
+                  variant="secondary"
+                  size="sm"
+                  className="mt-4"
+                >
+                  Ask on WhatsApp
+                </LinkButton>
+              </div>
+            )}
+          </Container>
+        </section>
+      )}
 
       {/* Short clips */}
       <ShortsRow shorts={exam.shorts ?? []} />
 
-      {/* Testimonials, filtered by exam */}
-      <TestimonialCarousel
-        testimonials={exam.testimonials}
-        title={`What Our ${exam.shortName} Students Say`}
-      />
+      {/* Testimonials, filtered by exam — omitted entirely for minimal exams */}
+      {!exam.minimalCourse && (
+        <TestimonialCarousel
+          testimonials={exam.testimonials}
+          title={`What Our ${exam.shortName} Students Say`}
+        />
+      )}
 
       {/* Student reviews (star ratings) */}
       <ReviewsCarousel reviews={exam.reviews ?? []} />
 
-      {/* FAQ */}
-      <section className="bg-white py-16">
-        <Container className="max-w-3xl">
-          <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
-            Frequently Asked Questions
-          </h2>
-          {exam.faq.length > 0 ? (
-            <>
-              <div className="mt-8 divide-y divide-charcoal/10">
-                {exam.faq.map((item) => (
-                  <details key={item.question} className="group py-4">
-                    <summary className="flex cursor-pointer list-none items-center justify-between font-semibold text-charcoal">
-                      {item.question}
-                      <span className="ml-4 shrink-0 text-teal transition-transform group-open:rotate-45">
-                        +
-                      </span>
-                    </summary>
-                    <p className="mt-3 text-sm leading-relaxed text-charcoal/75">{item.answer}</p>
-                  </details>
-                ))}
+      {/* FAQ — omitted entirely for minimal exams */}
+      {!exam.minimalCourse && (
+        <section className="bg-white py-16">
+          <Container className="max-w-3xl">
+            <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
+              Frequently Asked Questions
+            </h2>
+            {exam.faq.length > 0 ? (
+              <>
+                <div className="mt-8 divide-y divide-charcoal/10">
+                  {exam.faq.map((item) => (
+                    <details key={item.question} className="group py-4">
+                      <summary className="flex cursor-pointer list-none items-center justify-between font-semibold text-charcoal">
+                        {item.question}
+                        <span className="ml-4 shrink-0 text-teal transition-transform group-open:rotate-45">
+                          +
+                        </span>
+                      </summary>
+                      <p className="mt-3 text-sm leading-relaxed text-charcoal/75">{item.answer}</p>
+                    </details>
+                  ))}
+                </div>
+                <script
+                  type="application/ld+json"
+                  dangerouslySetInnerHTML={{
+                    __html: JSON.stringify({
+                      "@context": "https://schema.org",
+                      "@type": "FAQPage",
+                      mainEntity: exam.faq.map((item) => ({
+                        "@type": "Question",
+                        name: item.question,
+                        acceptedAnswer: { "@type": "Answer", text: item.answer },
+                      })),
+                    }),
+                  }}
+                />
+              </>
+            ) : (
+              <div className="mt-8 rounded-2xl border border-dashed border-charcoal/20 bg-surface p-8 text-center">
+                <p className="text-sm text-charcoal/60">
+                  FAQs for {exam.shortName} are coming soon — reach out on WhatsApp with your questions.
+                </p>
               </div>
-              <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{
-                  __html: JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "FAQPage",
-                    mainEntity: exam.faq.map((item) => ({
-                      "@type": "Question",
-                      name: item.question,
-                      acceptedAnswer: { "@type": "Answer", text: item.answer },
-                    })),
-                  }),
-                }}
-              />
-            </>
-          ) : (
-            <div className="mt-8 rounded-2xl border border-dashed border-charcoal/20 bg-surface p-8 text-center">
-              <p className="text-sm text-charcoal/60">
-                FAQs for {exam.shortName} are coming soon — reach out on WhatsApp with your questions.
-              </p>
-            </div>
-          )}
-        </Container>
-      </section>
+            )}
+          </Container>
+        </section>
+      )}
 
-      {/* Price and offer */}
-      <PriceOfferSection price={exam.price} offer={exam.offer} />
+      {/* Price and offer — omitted entirely for minimal exams */}
+      {!exam.minimalCourse && <PriceOfferSection price={exam.price} offer={exam.offer} />}
 
       {/* How to enroll */}
       <HowToEnrollStrip />

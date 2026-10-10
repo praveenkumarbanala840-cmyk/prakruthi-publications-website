@@ -16,8 +16,14 @@ export async function generateMetadata({
   const exam = getExamBySlug(slug);
   if (!exam || !exam.hasFullCoursePage) return {};
 
+  const region = exam.slug.startsWith("ts-") ? "Telangana" : "Andhra Pradesh";
+  const tgAlias = exam.shortName.startsWith("TS ") ? exam.shortName.replace("TS ", "TG ") : null;
+  const aliasNote = tgAlias ? ` Also searched as ${tgAlias}.` : "";
+
   const title = `${exam.name} Coaching`;
-  const description = `${exam.name} coaching from Prakruthi Publications — syllabus coverage, batch timings, and exam-focused preparation for ${exam.shortName} aspirants in Andhra Pradesh.`;
+  const description = exam.minimalCourse
+    ? `${exam.name} coaching from Prakruthi Publications for ${exam.shortName} aspirants in ${region}.${aliasNote}`
+    : `${exam.name} coaching from Prakruthi Publications — syllabus coverage, batch timings, and exam-focused preparation for ${exam.shortName} aspirants in ${region}.${aliasNote}`;
 
   return {
     title,
