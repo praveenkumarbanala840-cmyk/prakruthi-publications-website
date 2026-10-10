@@ -14,12 +14,10 @@ export const siteConfig = {
     studentsSelected: "1000+",
   },
 
-  // TODO(client): confirm real Play Store URL.
-  playStoreUrl: "https://play.google.com/store/apps/details?id=REPLACE_ME",
+  playStoreUrl: "https://play.google.com/store/apps/details?id=co.diaz.lmtbk",
 
-  // TODO(client): confirm WhatsApp business number.
-  whatsappNumber: "", // e.g. "919999999999" (country code, no +/spaces)
-  whatsappMessage: "Hi, I'd like to know more about your courses.",
+  whatsappNumber: "919154503737", // country code 91 + 9154503737
+  whatsappMessage: "Hello, I would like to know about your courses.",
 
   instagramUrl: "https://www.instagram.com/prakruthipublications/",
 
