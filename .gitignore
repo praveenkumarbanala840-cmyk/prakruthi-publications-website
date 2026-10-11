@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local-only test videos — never committed (large binaries, not final assets)
+/public/test-videos/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
