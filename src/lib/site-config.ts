@@ -23,7 +23,7 @@ export const siteConfig = {
 
   // TODO(client): confirm email, phone/IVR, YouTube handle.
   contactEmail: "",
-  phone: "",
+  contactPhone: "",
   youtubeUrl: "",
 } as const;
 

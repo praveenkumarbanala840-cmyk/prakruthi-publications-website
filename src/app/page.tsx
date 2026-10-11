@@ -1,6 +1,7 @@
 import Hero from "@/components/sections/Hero";
 import CoursesPreview from "@/components/sections/CoursesPreview";
 import ShortsCarousel from "@/components/sections/ShortsCarousel";
+import GetTheApp from "@/components/sections/GetTheApp";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <CoursesPreview />
       <ShortsCarousel />
+      <GetTheApp />
     </>
   );
 }

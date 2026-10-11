@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Container from "@/components/ui/Container";
@@ -19,11 +20,16 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/95 backdrop-blur">
       <Container className="flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 font-display text-lg font-bold text-white">
-          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-mint text-sm font-bold text-black">
-            PP
-          </span>
-          <span className="hidden sm:inline">{siteConfig.name}</span>
+        <Link href="/" className="flex min-w-0 flex-1 items-center gap-2 font-display font-bold text-white md:flex-none">
+          <Image
+            src="/brand/logo.png"
+            alt=""
+            width={36}
+            height={36}
+            priority
+            className="h-8 w-8 shrink-0 rounded-full sm:h-9 sm:w-9"
+          />
+          <span className="truncate whitespace-nowrap text-sm sm:text-lg">{siteConfig.name}</span>
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
@@ -72,7 +78,7 @@ export default function Header() {
         </nav>
 
         <button
-          className="flex h-10 w-10 items-center justify-center rounded-full text-white md:hidden"
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white md:hidden"
           onClick={() => setMenuOpen((open) => !open)}
           aria-expanded={menuOpen}
           aria-label="Toggle menu"

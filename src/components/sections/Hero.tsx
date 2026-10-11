@@ -13,8 +13,8 @@ export default function Hero() {
         }}
         aria-hidden="true"
       />
-      <Container className="relative grid gap-10 py-16 sm:py-20 lg:grid-cols-2 lg:items-center lg:py-28">
-        <div>
+      <Container className="relative py-16 sm:py-20 lg:py-28">
+        <div className="mx-auto max-w-2xl text-center">
           <p className="inline-block rounded-full bg-mint/15 px-4 py-1 text-xs font-semibold uppercase tracking-wide text-mint">
             {visibleExams.map((exam) => exam.shortName).join(" · ")} Coaching
           </p>
@@ -22,29 +22,23 @@ export default function Hero() {
             {siteConfig.stats.studentsTrained} Students Trained for
             <span className="text-mint"> Government Exam Success</span>
           </h1>
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
             Prakruthi Publications provides structured, exam-focused coaching
             for Andhra Pradesh government exam aspirants — from syllabus to
             selection.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-wrap justify-center gap-4">
             <LinkButton href={siteConfig.playStoreUrl} size="lg">
               Enroll Now
             </LinkButton>
-            <LinkButton href="/courses/ap-tet" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-ink">
+            <LinkButton
+              href="#choose-your-exam"
+              variant="outline"
+              size="lg"
+              className="border-white text-white hover:bg-white hover:text-ink"
+            >
               View Courses
             </LinkButton>
-          </div>
-        </div>
-
-        <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-3xl border border-white/10 bg-white/5">
-          <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-white/40">
-            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M4 6h16v12H4z" stroke="currentColor" strokeWidth="1.5" />
-              <circle cx="9" cy="10" r="1.5" stroke="currentColor" strokeWidth="1.5" />
-              <path d="M4 16l5-4 3 3 3-2 5 5" stroke="currentColor" strokeWidth="1.5" />
-            </svg>
-            <p className="text-xs">Professor photo coming soon</p>
           </div>
         </div>
       </Container>

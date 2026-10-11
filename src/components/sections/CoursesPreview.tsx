@@ -4,7 +4,7 @@ import { visibleExams } from "@/lib/site-config";
 
 export default function CoursesPreview() {
   return (
-    <section className="py-16">
+    <section id="choose-your-exam" className="scroll-mt-16 py-16">
       <Container>
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">

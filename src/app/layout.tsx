@@ -39,7 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col bg-surface text-charcoal">
         <Header />
-        <main className="flex-1 pb-16">{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
         <StickyBottomCTA />
       </body>
