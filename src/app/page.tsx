@@ -1,15 +1,13 @@
 import Hero from "@/components/sections/Hero";
-import IntroVideoSection from "@/components/sections/IntroVideoSection";
 import CoursesPreview from "@/components/sections/CoursesPreview";
-import VideoTestimonials from "@/components/sections/VideoTestimonials";
+import ShortsCarousel from "@/components/sections/ShortsCarousel";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <IntroVideoSection />
       <CoursesPreview />
-      <VideoTestimonials />
+      <ShortsCarousel />
     </>
   );
 }

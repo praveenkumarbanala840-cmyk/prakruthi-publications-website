@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Container from "@/components/ui/Container";
-import { testimonialVideos, testimonialsHeading, mutedAutoplay } from "@/data/videos";
+import { LinkButton } from "@/components/ui/Button";
+import { shortVideos, shortsHeading, shortsSubheading, mutedAutoplay } from "@/data/videos";
+import { siteConfig } from "@/lib/site-config";
 
 type SlideState = "poster" | "playing" | "ended";
 
@@ -69,30 +71,8 @@ function MuteIcon({ muted }: { muted: boolean }) {
   );
 }
 
-function StarRow({ rating }: { rating: 1 | 2 | 3 | 4 | 5 }) {
-  return (
-    <div className="flex items-center justify-center gap-0.5" aria-label={`Rated ${rating} out of 5 stars`}>
-      {[1, 2, 3, 4, 5].map((n) => (
-        <svg
-          key={n}
-          width="16"
-          height="16"
-          viewBox="0 0 20 20"
-          fill={n <= rating ? "currentColor" : "none"}
-          stroke="currentColor"
-          strokeWidth="1.2"
-          aria-hidden="true"
-          className={n <= rating ? "text-mint" : "text-charcoal/25"}
-        >
-          <path d="M10 1.5l2.6 5.27 5.82.85-4.21 4.1 1 5.8L10 14.9l-5.21 2.74 1-5.8-4.21-4.1 5.82-.85L10 1.5z" />
-        </svg>
-      ))}
-    </div>
-  );
-}
-
-export default function VideoTestimonials() {
-  const slides = useMemo(() => testimonialVideos.filter((t) => t.src), []);
+export default function ShortsCarousel() {
+  const slides = useMemo(() => shortVideos.filter((v) => v.src), []);
 
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -102,7 +82,7 @@ export default function VideoTestimonials() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [slideStates, setSlideStates] = useState<SlideState[]>(() => slides.map(() => "poster"));
-  const [hasInteracted, setHasInteracted] = useState(false); // sound-mode: played at least one video
+  const [hasInteracted, setHasInteracted] = useState(false); // sound-mode: played at least one clip
   const [isMuted, setIsMuted] = useState(mutedAutoplay);
   const [inView, setInView] = useState(false);
   const [tabVisible, setTabVisible] = useState(true);
@@ -264,13 +244,12 @@ export default function VideoTestimonials() {
   return (
     <section ref={sectionRef} className="bg-ink py-14 sm:py-20">
       <Container>
-        <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl">
-          {testimonialsHeading}
-        </h2>
+        <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl">{shortsHeading}</h2>
+        <p className="mx-auto mt-2 max-w-md text-center text-sm text-white/60">{shortsSubheading}</p>
 
         <div
           role="region"
-          aria-label="Student testimonial videos"
+          aria-label="Short video clips"
           tabIndex={0}
           onKeyDown={handleKeyDown}
           className="relative mt-10 focus:outline-none"
@@ -311,7 +290,7 @@ export default function VideoTestimonials() {
                       <button
                         type="button"
                         onClick={() => (state === "ended" ? handleReplay(i) : handleManualPlay(i))}
-                        aria-label={state === "ended" ? `Replay testimonial ${i + 1}` : `Play testimonial ${i + 1} with sound`}
+                        aria-label={state === "ended" ? `Replay clip ${i + 1}` : `Play clip ${i + 1} with sound`}
                         className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/25 transition-colors hover:bg-black/35"
                       >
                         <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 text-ink shadow-lg transition-transform hover:scale-105">
@@ -351,24 +330,6 @@ export default function VideoTestimonials() {
                       </div>
                     )}
                   </div>
-
-                  {isActive && (slide.rating || slide.quote || slide.name) && (
-                    <div className="mt-3 text-center">
-                      {slide.rating && (
-                        <div className="mb-1">
-                          <StarRow rating={slide.rating} />
-                        </div>
-                      )}
-                      {slide.quote && <p className="text-sm italic text-white/85">&ldquo;{slide.quote}&rdquo;</p>}
-                      {(slide.name || slide.exam) && (
-                        <p className="mt-1 text-xs font-semibold text-white/60">
-                          {slide.name}
-                          {slide.name && slide.exam && " — "}
-                          {slide.exam}
-                        </p>
-                      )}
-                    </div>
-                  )}
                 </div>
               );
             })}
@@ -380,7 +341,7 @@ export default function VideoTestimonials() {
                 type="button"
                 onClick={() => navigateTo(Math.max(0, activeIndex - 1))}
                 disabled={activeIndex === 0}
-                aria-label="Previous testimonial"
+                aria-label="Previous clip"
                 className="absolute left-1 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full bg-white/90 p-2 text-ink shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:flex"
               >
                 <ChevronIcon direction="left" />
@@ -389,7 +350,7 @@ export default function VideoTestimonials() {
                 type="button"
                 onClick={() => navigateTo(Math.min(slides.length - 1, activeIndex + 1))}
                 disabled={activeIndex === slides.length - 1}
-                aria-label="Next testimonial"
+                aria-label="Next clip"
                 className="absolute right-1 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full bg-white/90 p-2 text-ink shadow-md transition-opacity hover:bg-white disabled:opacity-0 sm:flex"
               >
                 <ChevronIcon direction="right" />
@@ -405,13 +366,26 @@ export default function VideoTestimonials() {
                 key={i}
                 type="button"
                 onClick={() => navigateTo(i)}
-                aria-label={`Go to testimonial ${i + 1}`}
+                aria-label={`Go to clip ${i + 1}`}
                 aria-current={i === activeIndex}
                 className={`h-2 rounded-full transition-all ${
                   i === activeIndex ? "w-6 bg-mint" : "w-2 bg-white/30 hover:bg-white/50"
                 }`}
               />
             ))}
+          </div>
+        )}
+
+        {siteConfig.instagramUrl && (
+          <div className="mt-8 flex justify-center">
+            <LinkButton
+              href={siteConfig.instagramUrl}
+              variant="outline"
+              size="md"
+              className="border-white text-white hover:bg-white hover:text-ink"
+            >
+              Follow @prakruthipublications
+            </LinkButton>
           </div>
         )}
       </Container>
