@@ -4,6 +4,7 @@ import { LinkButton } from "@/components/ui/Button";
 import TestimonialCarousel from "@/components/sections/TestimonialCarousel";
 import ClickToLoadVideo from "@/components/ui/ClickToLoadVideo";
 import LocalVideoPlayer from "@/components/ui/LocalVideoPlayer";
+import AppCta from "@/components/sections/AppCta";
 import CourseOverviewPapers, { getPapers } from "@/components/sections/CourseOverviewPapers";
 import ShortsRow from "@/components/sections/ShortsRow";
 import ReviewsCarousel from "@/components/sections/ReviewsCarousel";
@@ -12,15 +13,6 @@ import HowToEnrollStrip from "@/components/sections/HowToEnrollStrip";
 import { articleTypes, siteConfig, whatsappLink } from "@/lib/site-config";
 import { promoVideo } from "@/data/videos";
 import type { ExamContent } from "@/data/types";
-
-function PhoneIcon() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" strokeWidth="1.5" />
-      <line x1="11" y1="18" x2="13" y2="18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
   const richHero = Boolean(exam.heroHeadline);
@@ -130,23 +122,9 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
               )}
             </div>
 
-            <div className="mt-10 flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-center sm:gap-6">
-              <LinkButton href={siteConfig.playStoreUrl} size="lg" className="w-full sm:w-auto">
-                Join Today
-              </LinkButton>
-              <LinkButton
-                href={whatsappLink(`Hi, I'd like to know about the ${exam.shortName} course.`)}
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto"
-              >
-                Ask on WhatsApp
-              </LinkButton>
+            <div className="mt-10">
+              <AppCta whatsappMessage={`Hi, I'd like to know about the ${exam.shortName} course.`} />
             </div>
-            <p className="mt-4 flex items-center justify-center gap-2 text-sm text-charcoal/60">
-              <PhoneIcon />
-              Courses are available in the Prakruthi Publications app on Google Play.
-            </p>
           </Container>
         </section>
       )}
