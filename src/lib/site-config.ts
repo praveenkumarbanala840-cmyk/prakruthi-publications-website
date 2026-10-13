@@ -5,7 +5,11 @@
 export const siteConfig = {
   name: "Prakruthi Publications",
   tagline: "Government Exam Coaching for Andhra Pradesh",
-  domain: "https://tangerine-granita-8c9902.netlify.app", // TODO: replace once a custom domain is connected
+
+  // No custom domain yet. Reads NEXT_PUBLIC_SITE_URL once one is connected
+  // (set it in Netlify's env vars) — metadataBase and every absolute share
+  // URL pick it up automatically, no other code changes needed.
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
 
   // The 3 anchor stats — reused in Hero, credibility bar, course pages, About.
   stats: {

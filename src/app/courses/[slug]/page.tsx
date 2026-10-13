@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CoursePageTemplate from "@/components/templates/CoursePageTemplate";
 import { allExams, getExamBySlug } from "@/data/exams";
+import { siteConfig } from "@/lib/site-config";
 
 export function generateStaticParams() {
   return allExams.filter((exam) => exam.hasFullCoursePage).map((exam) => ({ slug: exam.slug }));
@@ -29,6 +30,21 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/courses/${exam.slug}` },
+    openGraph: {
+      title,
+      description,
+      url: `/courses/${exam.slug}`,
+      siteName: siteConfig.name,
+      images: [{ url: "/og/share.png", width: 1200, height: 630, alt: siteConfig.name }],
+      locale: "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/og/share.png"],
+    },
   };
 }
 

@@ -22,13 +22,30 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
+const homeDescription = `Prakruthi Publications offers expert coaching for ${examListText()} government exams in Andhra Pradesh and Telangana, with 8+ years of experience and 1000+ students selected.`;
+
 export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.domain),
+  metadataBase: new URL(siteConfig.siteUrl),
   title: {
     default: "Prakruthi Publications — AP TET, AP DSC & Government Exam Coaching",
     template: "%s | Prakruthi Publications",
   },
-  description: `Prakruthi Publications offers expert coaching for ${examListText()} government exams in Andhra Pradesh and Telangana, with 8+ years of experience and 1000+ students selected.`,
+  description: homeDescription,
+  openGraph: {
+    title: "Prakruthi Publications — AP TET, AP DSC & Government Exam Coaching",
+    description: homeDescription,
+    url: "/",
+    siteName: siteConfig.name,
+    images: [{ url: "/og/share.png", width: 1200, height: 630, alt: siteConfig.name }],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Prakruthi Publications — AP TET, AP DSC & Government Exam Coaching",
+    description: homeDescription,
+    images: ["/og/share.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
