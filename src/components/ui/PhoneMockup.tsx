@@ -2,14 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { appScreenshots } from "@/data/appScreenshots";
+import { appScreenshots, appPosterSrc } from "@/data/appScreenshots";
 
 /**
  * A generic, hand-drawn phone frame (no real device brand) with a soft mint
  * glow and a gentle floating animation. Shows real app screenshots as a
  * swipeable row when any are listed in appScreenshots.ts, otherwise falls
- * back to the logo + wordmark on a dark teal gradient. Never draws fake
- * app UI.
+ * back to the poster image (appPosterSrc) filling the screen. Never draws
+ * fake app UI.
  */
 export default function PhoneMockup() {
   const trackRef = useRef<HTMLDivElement>(null);
@@ -67,10 +67,14 @@ export default function PhoneMockup() {
                   ))}
                 </div>
               ) : (
-                <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-gradient-to-b from-teal-dark to-ink p-4 text-center">
-                  <Image src="/brand/logo.png" alt="" width={56} height={56} className="h-14 w-14 rounded-full" />
-                  <p className="font-display text-xs font-bold leading-snug text-white">Prakruthi Publications</p>
-                </div>
+                <Image
+                  src={appPosterSrc}
+                  alt="Prakruthi Publications - Psychology with GS Rao"
+                  width={906}
+                  height={1600}
+                  loading="lazy"
+                  className="h-full w-full object-cover"
+                />
               )}
             </div>
           </div>
