@@ -4,11 +4,16 @@ import Reviews from "@/components/sections/Reviews";
 import type { Review } from "@/data/reviews";
 
 // Dev-only: lets us see the Reviews carousel styled and populated before
-// any real review text exists. Never reachable in production.
-export const metadata: Metadata = {
-  title: "Reviews preview (dev only)",
-  robots: { index: false, follow: false },
-};
+// any real review text exists. Never reachable in production — metadata
+// is generated conditionally so the title never leaks into the 404 head
+// that the production build actually serves for this route.
+export async function generateMetadata(): Promise<Metadata> {
+  if (process.env.NODE_ENV === "production") return {};
+  return {
+    title: "Reviews preview (dev only)",
+    robots: { index: false, follow: false },
+  };
+}
 
 // Obviously-fake sample text + a mix of ratings (none, 4, 4.5, 5) to check
 // every card state. Names are generic placeholders, not real students —

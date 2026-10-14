@@ -141,34 +141,32 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div>
-          <h3 className="font-display text-sm font-semibold uppercase tracking-wide text-mint">
-            Contact
-          </h3>
-          <ul className="mt-3 space-y-2 text-sm">
-            {siteConfig.contactEmail ? (
-              <li>
-                <a href={`mailto:${siteConfig.contactEmail}`} className="hover:text-white">
-                  {siteConfig.contactEmail}
-                </a>
-              </li>
-            ) : (
-              <li>Email coming soon</li>
-            )}
-            {siteConfig.contactPhone ? (
-              <li>
-                <a
-                  href={`tel:${siteConfig.contactPhone.replace(/\s+/g, "")}`}
-                  className="hover:text-white"
-                >
-                  {siteConfig.contactPhone}
-                </a>
-              </li>
-            ) : (
-              <li>Phone coming soon</li>
-            )}
-          </ul>
-        </div>
+        {(siteConfig.contactEmail || siteConfig.contactPhone) && (
+          <div>
+            <h3 className="font-display text-sm font-semibold uppercase tracking-wide text-mint">
+              Contact
+            </h3>
+            <ul className="mt-3 space-y-2 text-sm">
+              {siteConfig.contactEmail && (
+                <li>
+                  <a href={`mailto:${siteConfig.contactEmail}`} className="hover:text-white">
+                    {siteConfig.contactEmail}
+                  </a>
+                </li>
+              )}
+              {siteConfig.contactPhone && (
+                <li>
+                  <a
+                    href={`tel:${siteConfig.contactPhone.replace(/\s+/g, "")}`}
+                    className="hover:text-white"
+                  >
+                    {siteConfig.contactPhone}
+                  </a>
+                </li>
+              )}
+            </ul>
+          </div>
+        )}
       </Container>
 
       <div className="border-t border-white/10 py-4">

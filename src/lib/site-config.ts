@@ -2,14 +2,28 @@
 // Every value here must trace back to something the client actually provided —
 // do not add stats, counts, or claims that aren't confirmed.
 
+// No custom domain yet. Reads NEXT_PUBLIC_SITE_URL once one is connected
+// (set it in Netlify's env vars) — metadataBase, the sitemap, and every
+// absolute share URL pick it up automatically, no other code changes
+// needed. On Netlify specifically, a missing value is a hard build
+// failure rather than a silent localhost fallback, since canonical URLs
+// and the sitemap would otherwise ship pointing at localhost.
+function resolveSiteUrl(): string {
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
+  if (siteUrl) return siteUrl;
+  if (process.env.NETLIFY === "true") {
+    throw new Error(
+      "NEXT_PUBLIC_SITE_URL is not set. Set it in Netlify's site environment variables before deploying."
+    );
+  }
+  return "http://localhost:3000";
+}
+
 export const siteConfig = {
   name: "Prakruthi Publications",
   tagline: "Government Exam Coaching for Andhra Pradesh",
 
-  // No custom domain yet. Reads NEXT_PUBLIC_SITE_URL once one is connected
-  // (set it in Netlify's env vars) — metadataBase and every absolute share
-  // URL pick it up automatically, no other code changes needed.
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
+  siteUrl: resolveSiteUrl(),
 
   // The 3 anchor stats — reused in Hero, credibility bar, course pages, About.
   stats: {

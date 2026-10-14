@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CoursePageTemplate from "@/components/templates/CoursePageTemplate";
 import { allExams, getExamBySlug } from "@/data/exams";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig, visibleExams } from "@/lib/site-config";
+
+const visibleSlugs = new Set(visibleExams.map((exam) => exam.slug));
 
 export function generateStaticParams() {
-  return allExams.filter((exam) => exam.hasFullCoursePage).map((exam) => ({ slug: exam.slug }));
+  return allExams
+    .filter((exam) => visibleSlugs.has(exam.slug) && exam.hasFullCoursePage)
+    .map((exam) => ({ slug: exam.slug }));
 }
 
 export async function generateMetadata({
@@ -15,7 +19,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const exam = getExamBySlug(slug);
-  if (!exam || !exam.hasFullCoursePage) return {};
+  if (!exam || !visibleSlugs.has(exam.slug) || !exam.hasFullCoursePage) return {};
 
   const region = exam.slug.startsWith("ts-") ? "Telangana" : "Andhra Pradesh";
   const tgAlias = exam.shortName.startsWith("TS ") ? exam.shortName.replace("TS ", "TG ") : null;
@@ -56,7 +60,7 @@ export default async function CoursePage({
   const { slug } = await params;
   const exam = getExamBySlug(slug);
 
-  if (!exam || !exam.hasFullCoursePage) {
+  if (!exam || !visibleSlugs.has(exam.slug) || !exam.hasFullCoursePage) {
     notFound();
   }
 

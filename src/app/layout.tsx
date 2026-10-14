@@ -31,6 +31,7 @@ export const metadata: Metadata = {
     template: "%s | Prakruthi Publications",
   },
   description: homeDescription,
+  alternates: { canonical: "/" },
   openGraph: {
     title: "Prakruthi Publications — AP TET, AP DSC & Government Exam Coaching",
     description: homeDescription,
