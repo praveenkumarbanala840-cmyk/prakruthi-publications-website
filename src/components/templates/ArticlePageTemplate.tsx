@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import Container from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
 import { articleTypes, siteConfig, whatsappLink } from "@/lib/site-config";
-import type { ExamContent } from "@/data/types";
+import type { ExamContent, SyllabusDownload } from "@/data/types";
 
 interface ArticlePageTemplateProps {
   exam: ExamContent;
@@ -13,6 +13,8 @@ interface ArticlePageTemplateProps {
   sourceNote?: string;
   /** Which article slugs actually exist for this exam (defaults to all 4). */
   availableArticleSlugs?: (typeof articleTypes)[number]["slug"][];
+  /** Shows a "Download the official syllabus" block at the top. Pass only on the syllabus article page. */
+  syllabusDownload?: SyllabusDownload;
   children: ReactNode;
 }
 
@@ -23,6 +25,7 @@ export default function ArticlePageTemplate({
   intro,
   sourceNote,
   availableArticleSlugs = articleTypes.map((a) => a.slug),
+  syllabusDownload,
   children,
 }: ArticlePageTemplateProps) {
   const otherArticles = articleTypes.filter(
@@ -46,6 +49,26 @@ export default function ArticlePageTemplate({
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-charcoal/75">{intro}</p>
           {sourceNote && (
             <p className="mt-3 max-w-2xl text-xs text-charcoal/50">{sourceNote}</p>
+          )}
+
+          {syllabusDownload && (
+            <div className="mt-6 flex max-w-2xl flex-col items-start justify-between gap-4 rounded-2xl border border-mint/30 bg-surface p-5 sm:flex-row sm:items-center">
+              <div>
+                <p className="font-display text-base font-bold text-charcoal">
+                  Download the official syllabus
+                </p>
+                <p className="mt-1 text-sm text-charcoal/70">{syllabusDownload.title}</p>
+                <p className="mt-2 text-xs text-charcoal/50">{syllabusDownload.description}</p>
+              </div>
+              <a
+                href={syllabusDownload.fileUrl}
+                target="_blank"
+                rel="noopener"
+                className="shrink-0 rounded-full bg-mint px-5 py-2.5 text-sm font-semibold text-black hover:bg-mint-dark"
+              >
+                Download
+              </a>
+            </div>
           )}
         </Container>
       </section>

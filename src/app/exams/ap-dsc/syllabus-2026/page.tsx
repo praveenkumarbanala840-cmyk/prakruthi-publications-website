@@ -25,6 +25,7 @@ export default function DscSyllabusPage() {
       title="AP DSC Syllabus 2026 — Subject-Wise Breakdown"
       intro="The AP DSC (Andhra Pradesh District Selection Committee) exam covers General Knowledge, Perspectives in Education, Educational Psychology, and Content & Methodology for your teaching subject. Here's the established subject-wise structure to plan your preparation around."
       sourceNote="The AP Mega DSC 2026 notification is expected in October 2026, with the exam likely in December 2026. The breakdown below reflects the established AP DSC exam pattern from prior recruitment cycles — always cross-check the final syllabus against the official notification at cse.ap.gov.in once released."
+      syllabusDownload={dsc.syllabusDownload}
     >
       <div>
         <ArticleH2>How the AP DSC Syllabus Is Structured</ArticleH2>

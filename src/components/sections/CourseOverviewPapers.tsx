@@ -15,7 +15,7 @@ export default function CourseOverviewPapers({ exam }: { exam: ExamContent }) {
   const lessons = exam.lessons ?? [];
   const papers = getPapers(exam.slug).slice(0, 4);
 
-  if (lessons.length === 0 && papers.length === 0) return null;
+  if (lessons.length === 0 && papers.length === 0 && !exam.syllabusDownload) return null;
 
   return (
     <section className="bg-white py-16">
@@ -76,6 +76,27 @@ export default function CourseOverviewPapers({ exam }: { exam: ExamContent }) {
             </Link>
           </div>
         </div>
+
+        {exam.syllabusDownload && (
+          <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-charcoal/10 bg-surface p-6 sm:flex-row sm:items-center">
+            <div>
+              <h3 className="font-display text-lg font-bold text-charcoal">
+                {exam.syllabusDownload.title}
+              </h3>
+              <p className="mt-2 max-w-xl text-sm text-charcoal/60">
+                {exam.syllabusDownload.description}
+              </p>
+            </div>
+            <a
+              href={exam.syllabusDownload.fileUrl}
+              target="_blank"
+              rel="noopener"
+              className="shrink-0 rounded-full bg-mint px-5 py-2.5 text-sm font-semibold text-black hover:bg-mint-dark"
+            >
+              Download
+            </a>
+          </div>
+        )}
       </Container>
     </section>
   );

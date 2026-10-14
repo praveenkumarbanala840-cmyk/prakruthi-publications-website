@@ -53,6 +53,12 @@ export interface CourseOffer {
   validUntil: string; // ISO date (YYYY-MM-DD) — offer auto-hides after this date
 }
 
+export interface SyllabusDownload {
+  title: string;
+  description: string;
+  fileUrl: string; // path under /downloads/...
+}
+
 export interface ExamContent {
   slug: string;
   name: string;
@@ -82,6 +88,7 @@ export interface ExamContent {
   reviews?: Review[];
   price?: CoursePrice;
   offer?: CourseOffer;
+  syllabusDownload?: SyllabusDownload;
 
   // When true, CoursePageTemplate renders only the hero, credibility block,
   // how-to-enroll strip, related-articles, and final CTA — no batch-timings
