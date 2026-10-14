@@ -1,28 +1,11 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Container from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
-import { shortVideos, shortsHeading, shortsSubheading, mutedAutoplay } from "@/data/videos";
+import ClickToLoadVideo from "@/components/ui/ClickToLoadVideo";
+import { shortVideos, shortsHeading, shortsSubheading } from "@/data/videos";
 import { siteConfig } from "@/lib/site-config";
-
-type SlideState = "poster" | "playing" | "ended";
-
-function PlayIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={`ml-0.5 ${className}`}>
-      <path d="M8 5v14l11-7z" />
-    </svg>
-  );
-}
-
-function ReplayIcon() {
-  return (
-    <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" />
-    </svg>
-  );
-}
 
 function ChevronIcon({ direction }: { direction: "left" | "right" }) {
   return (
@@ -38,110 +21,22 @@ function ChevronIcon({ direction }: { direction: "left" | "right" }) {
   );
 }
 
-function FullscreenIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function MuteIcon({ muted }: { muted: boolean }) {
-  return muted ? (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor" />
-      <path d="M16 9l5 6M21 9l-5 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  ) : (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M11 5 6 9H3v6h3l5 4V5z" fill="currentColor" />
-      <path
-        d="M15.5 8.5a5 5 0 010 7M18 6a9 9 0 010 12"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
 export default function ShortsCarousel() {
-  const slides = useMemo(() => shortVideos.filter((v) => v.src), []);
+  const slides = useMemo(() => shortVideos.filter((v) => v.youtubeId), []);
 
-  const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const scrollDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isProgrammaticScroll = useRef(false);
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [slideStates, setSlideStates] = useState<SlideState[]>(() => slides.map(() => "poster"));
-  const [hasInteracted, setHasInteracted] = useState(false); // sound-mode: played at least one clip
-  const [isMuted, setIsMuted] = useState(mutedAutoplay);
-  const [inView, setInView] = useState(false);
-  const [tabVisible, setTabVisible] = useState(true);
+  // Only one slide's player is ever loaded at a time — navigating away
+  // unloads it (equivalent to pausing: the iframe is removed).
+  const [loadedIndex, setLoadedIndex] = useState<number | null>(null);
 
   const prefersReducedMotion = useMemo(
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     []
   );
-
-  const setSlideState = (index: number, state: SlideState) => {
-    setSlideStates((prev) => {
-      const next = [...prev];
-      next[index] = state;
-      return next;
-    });
-  };
-
-  // Pause every video except the active one whenever the active index
-  // changes, or when the carousel leaves view / the tab is hidden.
-  useEffect(() => {
-    videoRefs.current.forEach((video, i) => {
-      if (video && i !== activeIndex) video.pause();
-    });
-  }, [activeIndex]);
-
-  useEffect(() => {
-    if (!inView || !tabVisible) {
-      videoRefs.current.forEach((video) => video?.pause());
-    }
-  }, [inView, tabVisible]);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), { threshold: 0.4 });
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const onVisibility = () => setTabVisible(document.visibilityState === "visible");
-    document.addEventListener("visibilitychange", onVisibility);
-    return () => document.removeEventListener("visibilitychange", onVisibility);
-  }, []);
-
-  // mutedAutoplay mode: the active slide autoplays muted whenever it
-  // changes, as long as the carousel is visible and motion isn't reduced.
-  // This doesn't need a user gesture, so it's effect-driven rather than
-  // tied to a click/touch handler.
-  useEffect(() => {
-    if (!mutedAutoplay || prefersReducedMotion || !inView || !tabVisible) return;
-    const video = videoRefs.current[activeIndex];
-    if (!video) return;
-    video.muted = isMuted;
-    video.currentTime = 0;
-    video.play().catch(() => {
-      // Rejected — leave it on the poster, never throw.
-    });
-  }, [activeIndex, inView, tabVisible, prefersReducedMotion, isMuted]);
 
   if (slides.length === 0) return null;
 
@@ -156,58 +51,11 @@ export default function ShortsCarousel() {
     });
   }
 
-  /**
-   * Navigates to `index`. Called directly from click/touch handlers so the
-   * sound-mode "autoplay next slide" call below runs inside the same user
-   * gesture — a prerequisite for unmuted play() to be allowed.
-   */
   function navigateTo(index: number) {
     if (index === activeIndex) return;
     setActiveIndex(index);
     scrollToIndex(index);
-
-    if (!mutedAutoplay && hasInteracted) {
-      const video = videoRefs.current[index];
-      if (video) {
-        video.muted = false;
-        video.currentTime = 0;
-        video.play().then(() => setSlideState(index, "playing")).catch(() => setSlideState(index, "poster"));
-      }
-    }
-  }
-
-  function handleManualPlay(index: number) {
-    const video = videoRefs.current[index];
-    if (!video) return;
-    video.muted = mutedAutoplay ? isMuted : false;
-    video
-      .play()
-      .then(() => {
-        setSlideState(index, "playing");
-        if (!mutedAutoplay) setHasInteracted(true);
-      })
-      .catch(() => setSlideState(index, "poster"));
-  }
-
-  function handleReplay(index: number) {
-    const video = videoRefs.current[index];
-    if (!video) return;
-    video.currentTime = 0;
-    handleManualPlay(index);
-  }
-
-  function toggleMute() {
-    const next = !isMuted;
-    setIsMuted(next);
-    const video = videoRefs.current[activeIndex];
-    if (video) video.muted = next;
-  }
-
-  function requestFullscreen(index: number) {
-    const video = videoRefs.current[index];
-    video?.requestFullscreen?.().catch(() => {
-      // Fullscreen request can be rejected by the browser — ignore.
-    });
+    setLoadedIndex((prev) => (prev === index ? prev : null));
   }
 
   // Debounced scroll-settle handler: detects which card the user swiped
@@ -242,7 +90,7 @@ export default function ShortsCarousel() {
   }
 
   return (
-    <section ref={sectionRef} className="bg-ink py-14 sm:py-20">
+    <section className="bg-ink py-14 sm:py-20">
       <Container>
         <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl">{shortsHeading}</h2>
         <p className="mx-auto mt-2 max-w-md text-center text-sm text-white/60">{shortsSubheading}</p>
@@ -260,75 +108,24 @@ export default function ShortsCarousel() {
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden scroll-smooth px-4 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:px-[12vw] [&::-webkit-scrollbar]:hidden"
           >
             {slides.map((slide, i) => {
-              const state = slideStates[i] ?? "poster";
               const isActive = i === activeIndex;
 
               return (
                 <div
-                  key={slide.src ?? i}
+                  key={slide.youtubeId ?? i}
                   className={`relative shrink-0 snap-center transition-all duration-300 ${
                     isActive ? "scale-100 opacity-100" : "scale-90 opacity-40"
                   }`}
                   style={{ width: "min(78vw, 300px)" }}
                 >
-                  <div className="relative aspect-[9/16] w-full overflow-hidden rounded-2xl bg-black shadow-xl">
-                    <video
-                      ref={(el) => {
-                        videoRefs.current[i] = el;
-                      }}
-                      src={slide.src ? `${slide.src}#t=0.1` : undefined}
-                      preload="metadata"
-                      playsInline
-                      muted={mutedAutoplay ? isMuted && isActive : false}
-                      className="h-full w-full object-contain"
-                      onPlay={() => setSlideState(i, "playing")}
-                      onPause={() => setSlideState(i, "poster")}
-                      onEnded={() => setSlideState(i, "ended")}
+                  <div className="overflow-hidden rounded-2xl shadow-xl">
+                    <ClickToLoadVideo
+                      youtubeId={slide.youtubeId!}
+                      title={`Clip ${i + 1}`}
+                      aspect="short"
+                      loaded={loadedIndex === i}
+                      onPlay={() => setLoadedIndex(i)}
                     />
-
-                    {isActive && state !== "playing" && (
-                      <button
-                        type="button"
-                        onClick={() => (state === "ended" ? handleReplay(i) : handleManualPlay(i))}
-                        aria-label={state === "ended" ? `Replay clip ${i + 1}` : `Play clip ${i + 1} with sound`}
-                        className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-black/25 transition-colors hover:bg-black/35"
-                      >
-                        <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/95 text-ink shadow-lg transition-transform hover:scale-105">
-                          {state === "ended" ? <ReplayIcon /> : <PlayIcon />}
-                        </span>
-                        {state === "poster" && !mutedAutoplay && (
-                          <span className="rounded-full bg-black/60 px-3 py-1 text-xs font-semibold text-white">
-                            Tap to play with sound
-                          </span>
-                        )}
-                        {state === "ended" && (
-                          <span className="rounded-full bg-black/60 px-3 py-1 text-xs font-semibold text-white">Replay</span>
-                        )}
-                      </button>
-                    )}
-
-                    {isActive && (
-                      <div className="absolute right-2 top-2 flex gap-1.5">
-                        {mutedAutoplay && (
-                          <button
-                            type="button"
-                            onClick={toggleMute}
-                            aria-label={isMuted ? "Unmute" : "Mute"}
-                            className="flex h-8 w-8 items-center justify-center rounded-full bg-black/55 text-white transition-colors hover:bg-black/70"
-                          >
-                            <MuteIcon muted={isMuted} />
-                          </button>
-                        )}
-                        <button
-                          type="button"
-                          onClick={() => requestFullscreen(i)}
-                          aria-label="Fullscreen"
-                          className="flex h-8 w-8 items-center justify-center rounded-full bg-black/55 text-white transition-colors hover:bg-black/70"
-                        >
-                          <FullscreenIcon />
-                        </button>
-                      </div>
-                    )}
                   </div>
                 </div>
               );

@@ -7,6 +7,11 @@ interface ClickToLoadVideoProps {
   title?: string;
   aspect?: "video" | "short"; // 16:9 vs 9:16
   label?: string; // small badge shown on the thumbnail, e.g. "Course"
+  // Controlled mode: pass both to let a parent (e.g. a carousel) own
+  // whether the player is loaded, so it can unload it again (navigate
+  // away = stop). Omit both for normal uncontrolled usage.
+  loaded?: boolean;
+  onPlay?: () => void;
 }
 
 export default function ClickToLoadVideo({
@@ -14,18 +19,29 @@ export default function ClickToLoadVideo({
   title,
   aspect = "video",
   label,
+  loaded: loadedProp,
+  onPlay,
 }: ClickToLoadVideoProps) {
-  const [loaded, setLoaded] = useState(false);
+  const [internalLoaded, setInternalLoaded] = useState(false);
+  const [posterFailed, setPosterFailed] = useState(false);
+  const isControlled = loadedProp !== undefined;
+  const loaded = isControlled ? loadedProp : internalLoaded;
   const aspectClass = aspect === "short" ? "aspect-[9/16]" : "aspect-video";
+
+  function handlePlay() {
+    if (!isControlled) setInternalLoaded(true);
+    onPlay?.();
+  }
 
   if (loaded) {
     return (
       <div className={`${aspectClass} w-full overflow-hidden rounded-xl bg-black`}>
         <iframe
-          src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1`}
+          src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&rel=0&playsinline=1&modestbranding=1`}
           title={title || "Video"}
           className="h-full w-full"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+          loading="lazy"
           allowFullScreen
         />
       </div>
@@ -35,16 +51,22 @@ export default function ClickToLoadVideo({
   return (
     <button
       type="button"
-      onClick={() => setLoaded(true)}
+      onClick={handlePlay}
       className={`group relative ${aspectClass} w-full overflow-hidden rounded-xl bg-black`}
       aria-label={`Play video${title ? `: ${title}` : ""}`}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
-        alt={title || "Video thumbnail"}
-        className="h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-60"
-      />
+      {posterFailed ? (
+        <div className="absolute inset-0 bg-teal" aria-hidden="true" />
+      ) : (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={`https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`}
+          alt={title || "Video thumbnail"}
+          loading="lazy"
+          onError={() => setPosterFailed(true)}
+          className="h-full w-full object-cover opacity-80 transition-opacity group-hover:opacity-60"
+        />
+      )}
       {label && (
         <span className="absolute left-3 top-3 rounded-full bg-mint px-3 py-1 text-xs font-semibold text-black">
           {label}

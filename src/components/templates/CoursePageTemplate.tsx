@@ -16,6 +16,16 @@ import type { ExamContent } from "@/data/types";
 
 export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
   const richHero = Boolean(exam.heroHeadline);
+  // Prefer the exam's own intro video, then the shared promo video's
+  // YouTube id once the client provides one. With neither set, the local
+  // promoVideo.src is a dev-only convenience (process.env.NODE_ENV is
+  // inlined at build time, so this branch — and the /test-videos
+  // reference it uses — is dead-code-eliminated from the production
+  // build) and the whole section is hidden in production.
+  const promoYoutubeId = exam.introVideo?.youtubeId || promoVideo.youtubeId;
+  const showLocalPromoFallback =
+    !promoYoutubeId && process.env.NODE_ENV !== "production" && Boolean(promoVideo.src);
+  const showCourseOverviewVideo = Boolean(promoYoutubeId) || showLocalPromoFallback;
   const hasPreviousPapers =
     exam.availableArticles.includes("previous-papers") && getPapers(exam.slug).length > 0;
   const secondaryCta =
@@ -102,19 +112,20 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
         </section>
       )}
 
-      {/* Course overview video: the exam's own video if the template has
-          one, otherwise the shared promo video — never both. */}
-      {(exam.introVideo?.youtubeId || promoVideo.src) && (
+      {/* Course overview video: the exam's own video if it has one,
+          otherwise the shared promo video — never both. Hidden entirely
+          in production until one of them has a youtubeId. */}
+      {showCourseOverviewVideo && (
         <section className="bg-white py-16">
           <Container className="max-w-2xl">
             <h2 className="text-center font-display text-2xl font-bold text-charcoal sm:text-3xl">
               Watch the Course Overview
             </h2>
             <div className="mt-8">
-              {exam.introVideo?.youtubeId ? (
+              {promoYoutubeId ? (
                 <ClickToLoadVideo
-                  youtubeId={exam.introVideo.youtubeId}
-                  title={exam.introVideo.title}
+                  youtubeId={promoYoutubeId}
+                  title={exam.introVideo?.title}
                   label="Course"
                 />
               ) : (
