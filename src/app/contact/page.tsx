@@ -45,6 +45,33 @@ export default function ContactPage() {
               @prakruthipublications
             </a>
           </p>
+
+          {(siteConfig.contactEmail || siteConfig.contactPhone) && (
+            <ul className="space-y-1 text-sm text-charcoal/70">
+              {siteConfig.contactEmail && (
+                <li>
+                  Email:{" "}
+                  <a
+                    href={`mailto:${siteConfig.contactEmail}`}
+                    className="font-semibold text-teal hover:underline"
+                  >
+                    {siteConfig.contactEmail}
+                  </a>
+                </li>
+              )}
+              {siteConfig.contactPhone && (
+                <li>
+                  Phone:{" "}
+                  <a
+                    href={`tel:${siteConfig.contactPhone.replace(/\s+/g, "")}`}
+                    className="font-semibold text-teal hover:underline"
+                  >
+                    {siteConfig.contactPhone}
+                  </a>
+                </li>
+              )}
+            </ul>
+          )}
         </div>
       </Container>
     </>

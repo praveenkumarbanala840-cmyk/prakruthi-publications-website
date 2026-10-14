@@ -25,9 +25,9 @@ export const siteConfig = {
 
   instagramUrl: "https://www.instagram.com/prakruthipublications/",
 
-  // TODO(client): confirm email, phone/IVR, YouTube handle.
-  contactEmail: "",
-  contactPhone: "",
+  // TODO(client): confirm YouTube handle.
+  contactEmail: "prakruthipublication@gmail.com",
+  contactPhone: "+91 91545 03737",
   youtubeUrl: "",
 } as const;
 

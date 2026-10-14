@@ -146,8 +146,27 @@ export default function Footer() {
             Contact
           </h3>
           <ul className="mt-3 space-y-2 text-sm">
-            <li>{siteConfig.contactEmail || "Email coming soon"}</li>
-            <li>{siteConfig.contactPhone || "Phone coming soon"}</li>
+            {siteConfig.contactEmail ? (
+              <li>
+                <a href={`mailto:${siteConfig.contactEmail}`} className="hover:text-white">
+                  {siteConfig.contactEmail}
+                </a>
+              </li>
+            ) : (
+              <li>Email coming soon</li>
+            )}
+            {siteConfig.contactPhone ? (
+              <li>
+                <a
+                  href={`tel:${siteConfig.contactPhone.replace(/\s+/g, "")}`}
+                  className="hover:text-white"
+                >
+                  {siteConfig.contactPhone}
+                </a>
+              </li>
+            ) : (
+              <li>Phone coming soon</li>
+            )}
           </ul>
         </div>
       </Container>
