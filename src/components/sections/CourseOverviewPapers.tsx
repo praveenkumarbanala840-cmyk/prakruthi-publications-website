@@ -14,18 +14,54 @@ export function getPapers(slug: string) {
 export default function CourseOverviewPapers({ exam }: { exam: ExamContent }) {
   const lessons = exam.lessons ?? [];
   const papers = getPapers(exam.slug).slice(0, 4);
+  const hasLessons = lessons.length > 0;
 
-  if (lessons.length === 0 && papers.length === 0 && !exam.syllabusDownload) return null;
+  if (!hasLessons && papers.length === 0 && !exam.syllabusDownload) return null;
+
+  const papersCard = (
+    <div className="rounded-2xl border border-charcoal/10 bg-surface p-6">
+      <h3 className="font-display text-lg font-bold text-charcoal">
+        Free: {exam.shortName} Previous Papers
+      </h3>
+      {papers.length > 0 ? (
+        <ul className="mt-4 divide-y divide-charcoal/10">
+          {papers.map((paper) => (
+            <li key={paper.path} className="flex items-center justify-between gap-3 py-3">
+              <p className="text-sm text-charcoal/80">{paper.title}</p>
+              <a
+                href={paper.path}
+                download
+                className="shrink-0 rounded-full bg-mint px-3 py-1 text-xs font-semibold text-black hover:bg-mint-dark"
+              >
+                Download
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-4 text-sm text-charcoal/60">Coming soon.</p>
+      )}
+      <Link
+        href={`/exams/${exam.slug}/previous-papers`}
+        className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-teal hover:underline"
+      >
+        View all
+        <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+      </Link>
+    </div>
+  );
 
   return (
     <section className="bg-white py-16">
       <Container>
-        <div className="grid gap-10 lg:grid-cols-2">
-          <div>
-            <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
-              Course Overview
-            </h2>
-            {lessons.length > 0 ? (
+        {hasLessons ? (
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div>
+              <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
+                Course Overview
+              </h2>
               <ol className="mt-6 space-y-3">
                 {lessons.map((lesson, i) => (
                   <li key={lesson} className="flex gap-3 text-sm text-charcoal/80 sm:text-base">
@@ -36,46 +72,13 @@ export default function CourseOverviewPapers({ exam }: { exam: ExamContent }) {
                   </li>
                 ))}
               </ol>
-            ) : (
-              <p className="mt-6 text-sm text-charcoal/60">
-                Lesson list is being finalized.
-              </p>
-            )}
-          </div>
+            </div>
 
-          <div className="rounded-2xl border border-charcoal/10 bg-surface p-6">
-            <h3 className="font-display text-lg font-bold text-charcoal">
-              Free: {exam.shortName} Previous Papers
-            </h3>
-            {papers.length > 0 ? (
-              <ul className="mt-4 divide-y divide-charcoal/10">
-                {papers.map((paper) => (
-                  <li key={paper.path} className="flex items-center justify-between gap-3 py-3">
-                    <p className="text-sm text-charcoal/80">{paper.title}</p>
-                    <a
-                      href={paper.path}
-                      download
-                      className="shrink-0 rounded-full bg-mint px-3 py-1 text-xs font-semibold text-black hover:bg-mint-dark"
-                    >
-                      Download
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className="mt-4 text-sm text-charcoal/60">Coming soon.</p>
-            )}
-            <Link
-              href={`/exams/${exam.slug}/previous-papers`}
-              className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-teal hover:underline"
-            >
-              View all
-              <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
+            {papersCard}
           </div>
-        </div>
+        ) : (
+          <div className="mx-auto max-w-2xl">{papersCard}</div>
+        )}
 
         {exam.syllabusDownload && (
           <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-2xl border border-charcoal/10 bg-surface p-6 sm:flex-row sm:items-center">

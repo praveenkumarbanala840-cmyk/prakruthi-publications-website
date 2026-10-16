@@ -70,11 +70,11 @@ export default function DscPreparationTipsPage() {
         <div className="mt-4">
           <ArticleP>
             Previous papers show you the actual difficulty level and question
-            style, not just the syllabus topics. We&apos;re compiling AP DSC{" "}
+            style, not just the syllabus topics. See the available{" "}
             <Link href="/exams/ap-dsc/previous-papers" className="font-semibold text-teal hover:underline">
-              previous papers and analysis
-            </Link>{" "}
-            — check back as this section grows.
+              AP DSC previous papers
+            </Link>
+            .
           </ArticleP>
         </div>
       </div>

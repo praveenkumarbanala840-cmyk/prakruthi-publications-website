@@ -48,7 +48,7 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/75">
             {exam.overview ||
-              `Structured, exam-focused coaching for ${exam.shortName} aspirants — from syllabus coverage to selection. Full course details are being finalized; enroll or message us on WhatsApp for the latest batch information.`}
+              `Structured, exam-focused psychology coaching for ${exam.shortName} aspirants. Enroll through the Prakruthi Publications app, or message us on WhatsApp for any questions.`}
           </p>
 
           {richHero && (
