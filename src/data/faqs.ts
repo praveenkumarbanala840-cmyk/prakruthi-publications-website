@@ -21,7 +21,7 @@ export const faqs: Faq[] = [
   {
     question: "Who is GS Rao?",
     answer:
-      "Prof. GS Rao teaches psychology for teacher recruitment exams. Prakruthi Publications is his platform for classes, books and study material, built to make psychology simple for TET and DSC aspirants.",
+      "Prof. GS Rao is a faculty of psychology, a counselling psychologist and an author, and the founder of Mirror Minds. Prakruthi Publications is his platform for classes, books and study material, built to make psychology simple for TET and DSC aspirants.",
   },
   {
     question: "Which exams do you cover?",
