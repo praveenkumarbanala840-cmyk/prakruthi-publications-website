@@ -58,13 +58,14 @@ html {
   }
 }
 
+/* Phone mockup float — ±8px over 6s. Only used by PhoneMockup.tsx. */
 @keyframes float-y {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateY(-8px);
   }
   50% {
-    transform: translateY(-6px);
+    transform: translateY(8px);
   }
 }
 
@@ -75,6 +76,120 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .animate-float {
     animation: none;
+  }
+}
+
+/* Slow ambient glow pulse behind the hero photo. */
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1.1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.22);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-glow-pulse {
+    animation: none;
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+/* Reveal (see Reveal.tsx) — the "reveal" class is only ever added
+   client-side, and only to elements confirmed below the fold at mount,
+   so server HTML and no-JS visitors always see content fully visible. */
+.reveal {
+  opacity: 0;
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.reveal-fade-up {
+  transform: translateY(18px);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* FAQ answer fade/slide — CSS-only, native <details>/<summary> kept
+   intact. Unsupported browsers (no @starting-style/allow-discrete) just
+   get the native instant toggle, same as before. */
+.faq-answer {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 220ms ease, transform 220ms ease, display 220ms allow-discrete;
+}
+
+details:not([open]) > .faq-answer {
+  display: none;
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
+@starting-style {
+  details[open] > .faq-answer {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-answer {
+    transition: none;
+  }
+}
+
+/* Thin scroll-progress bar — scroll-driven CSS animation, no JS. The
+   whole block only applies in browsers that support animation-timeline,
+   so unsupported browsers render nothing (the div stays an empty,
+   unstyled, zero-height block). */
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 60;
+    height: 3px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: linear-gradient(90deg, var(--color-teal), var(--color-mint));
+    animation: scroll-progress-grow auto linear;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes scroll-progress-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress {
+    display: none;
   }
 }
 

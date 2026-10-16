@@ -1,4 +1,5 @@
 import Container from "@/components/ui/Container";
+import CountUp from "@/components/ui/CountUp";
 import { siteConfig } from "@/lib/site-config";
 
 const stats = [
@@ -14,7 +15,7 @@ export default function CredibilityBar() {
         {stats.map((stat) => (
           <div key={stat.label} className="px-2 text-center sm:px-4">
             <p className="font-display text-2xl font-extrabold text-charcoal sm:text-3xl">
-              {stat.value}
+              <CountUp value={stat.value} />
             </p>
             <p className="mt-1 text-xs text-charcoal/60 sm:text-sm">{stat.label}</p>
           </div>

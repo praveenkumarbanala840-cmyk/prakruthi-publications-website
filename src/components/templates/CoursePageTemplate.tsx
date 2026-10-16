@@ -4,6 +4,8 @@ import { LinkButton } from "@/components/ui/Button";
 import TestimonialCarousel from "@/components/sections/TestimonialCarousel";
 import ClickToLoadVideo from "@/components/ui/ClickToLoadVideo";
 import LocalVideoPlayer from "@/components/ui/LocalVideoPlayer";
+import CountUp from "@/components/ui/CountUp";
+import Reveal from "@/components/ui/Reveal";
 import AppCta from "@/components/sections/AppCta";
 import CourseOverviewPapers, { getPapers } from "@/components/sections/CourseOverviewPapers";
 import ShortsRow from "@/components/sections/ShortsRow";
@@ -59,7 +61,9 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
                 { value: siteConfig.stats.studentsTrained, label: "Trained" },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <p className="font-display text-xl font-extrabold text-mint">{stat.value}</p>
+                  <p className="font-display text-xl font-extrabold text-mint">
+                    <CountUp value={stat.value} />
+                  </p>
                   <p className="text-xs text-white/60">{stat.label}</p>
                 </div>
               ))}
@@ -100,7 +104,9 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
                   { value: siteConfig.stats.studentsTrained, label: "Trained" },
                 ].map((stat) => (
                   <div key={stat.label}>
-                    <p className="font-display text-xl font-extrabold text-charcoal">{stat.value}</p>
+                    <p className="font-display text-xl font-extrabold text-charcoal">
+                      <CountUp value={stat.value} />
+                    </p>
                     <p className="text-xs text-charcoal/60">{stat.label}</p>
                   </div>
                 ))}
@@ -119,24 +125,26 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
       {showCourseOverviewVideo && (
         <section className="bg-white py-16">
           <Container className="max-w-2xl">
-            <h2 className="text-center font-display text-2xl font-bold text-charcoal sm:text-3xl">
-              Watch the Course Overview
-            </h2>
-            <div className="mt-8">
-              {promoYoutubeId ? (
-                <ClickToLoadVideo
-                  youtubeId={promoYoutubeId}
-                  title={promoTitle}
-                  label="Course"
-                />
-              ) : (
-                <LocalVideoPlayer src={promoVideo.src!} ariaLabel="Play course overview video" />
-              )}
-            </div>
+            <Reveal variant="fade-up">
+              <h2 className="text-center font-display text-2xl font-bold text-charcoal sm:text-3xl">
+                Watch the Course Overview
+              </h2>
+              <div className="mt-8">
+                {promoYoutubeId ? (
+                  <ClickToLoadVideo
+                    youtubeId={promoYoutubeId}
+                    title={promoTitle}
+                    label="Course"
+                  />
+                ) : (
+                  <LocalVideoPlayer src={promoVideo.src!} ariaLabel="Play course overview video" />
+                )}
+              </div>
+            </Reveal>
 
-            <div className="mt-10">
+            <Reveal variant="fade-up" className="mt-10">
               <AppCta whatsappMessage={`Hi, I'd like to know about the ${exam.shortName} course.`} />
-            </div>
+            </Reveal>
           </Container>
         </section>
       )}
@@ -229,7 +237,7 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
                       +
                     </span>
                   </summary>
-                  <p className="mt-3 text-sm leading-relaxed text-charcoal/75">{item.answer}</p>
+                  <p className="faq-answer mt-3 text-sm leading-relaxed text-charcoal/75">{item.answer}</p>
                 </details>
               ))}
             </div>
@@ -264,26 +272,28 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
         return (
           <section className="py-16">
             <Container>
-              <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
-                {exam.shortName} Exam Resources
-              </h2>
-              <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {availableArticles.map((article) => (
-                  <Link
-                    key={article.slug}
-                    href={`/exams/${exam.slug}/${article.slug}`}
-                    className="group rounded-xl border border-charcoal/10 bg-white p-5 shadow-sm transition-all hover:-translate-y-1 hover:border-teal hover:shadow-md"
-                  >
-                    <p className="font-display font-bold text-charcoal">{article.label}</p>
-                    <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-teal">
-                      Read
-                      <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                        <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                  </Link>
-                ))}
-              </div>
+              <Reveal variant="fade-up">
+                <h2 className="font-display text-2xl font-bold text-charcoal sm:text-3xl">
+                  {exam.shortName} Exam Resources
+                </h2>
+                <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                  {availableArticles.map((article) => (
+                    <Link
+                      key={article.slug}
+                      href={`/exams/${exam.slug}/${article.slug}`}
+                      className="group rounded-xl border border-charcoal/10 bg-white p-5 shadow-sm transition-all motion-safe:hover:-translate-y-1 hover:border-teal hover:shadow-md motion-safe:active:scale-[0.98]"
+                    >
+                      <p className="font-display font-bold text-charcoal">{article.label}</p>
+                      <span className="mt-2 inline-flex items-center gap-1 text-sm font-semibold text-teal">
+                        Read
+                        <svg width="12" height="12" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                          <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </Reveal>
             </Container>
           </section>
         );
@@ -292,32 +302,34 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
       {/* Final enroll CTA */}
       <section className="bg-ink py-14 text-center text-white">
         <Container>
-          <h2 className="font-display text-2xl font-bold sm:text-3xl">
-            Ready to start your {exam.shortName} preparation?
-          </h2>
-          <div className="mt-6 flex flex-wrap justify-center gap-4">
-            <LinkButton href={siteConfig.playStoreUrl} size="lg">
-              Enroll Now
-            </LinkButton>
-            <LinkButton
-              href={whatsappLink(`Hi, I'd like to enroll in the ${exam.shortName} course.`)}
-              variant="outline"
-              size="lg"
-              className="border-white text-white hover:bg-white hover:text-ink"
-            >
-              WhatsApp Us
-            </LinkButton>
-            {siteConfig.instagramUrl && (
+          <Reveal variant="fade-up">
+            <h2 className="font-display text-2xl font-bold sm:text-3xl">
+              Ready to start your {exam.shortName} preparation?
+            </h2>
+            <div className="mt-6 flex flex-wrap justify-center gap-4">
+              <LinkButton href={siteConfig.playStoreUrl} size="lg">
+                Enroll Now
+              </LinkButton>
               <LinkButton
-                href={siteConfig.instagramUrl}
+                href={whatsappLink(`Hi, I'd like to enroll in the ${exam.shortName} course.`)}
                 variant="outline"
                 size="lg"
                 className="border-white text-white hover:bg-white hover:text-ink"
               >
-                Free content on Instagram
+                WhatsApp Us
               </LinkButton>
-            )}
-          </div>
+              {siteConfig.instagramUrl && (
+                <LinkButton
+                  href={siteConfig.instagramUrl}
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white hover:text-ink"
+                >
+                  Free content on Instagram
+                </LinkButton>
+              )}
+            </div>
+          </Reveal>
         </Container>
       </section>
     </>

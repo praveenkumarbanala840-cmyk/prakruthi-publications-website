@@ -4,6 +4,7 @@ import Image from "next/image";
 import Container from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
 import PhoneMockup from "@/components/ui/PhoneMockup";
+import Reveal from "@/components/ui/Reveal";
 import { siteConfig, whatsappLink } from "@/lib/site-config";
 
 function findPlayBadge(): { src: string; width: number; height: number } | null {
@@ -106,9 +107,11 @@ export default function GetTheApp() {
       <Container className="relative">
         <div className="lg:grid lg:grid-cols-2 lg:items-center lg:gap-12">
           <div>
-            <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl lg:text-left">
-              Get the App
-            </h2>
+            <Reveal variant="fade-up">
+              <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl lg:text-left">
+                Get the App
+              </h2>
+            </Reveal>
 
             {/* Phone sits right after the heading on mobile; moves to its own
                 column on desktop (see the lg:-only copy below). */}
@@ -116,57 +119,59 @@ export default function GetTheApp() {
               <PhoneMockup />
             </div>
 
-            <p className="mt-6 text-center text-sm text-white/70 sm:text-base lg:text-left">
-              Download the Prakruthi Publications app to start learning anytime, anywhere.
-            </p>
+            <Reveal variant="fade-up">
+              <p className="mt-6 text-center text-sm text-white/70 sm:text-base lg:text-left">
+                Download the Prakruthi Publications app to start learning anytime, anywhere.
+              </p>
 
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              {TILES.map(({ label, Icon }) => (
-                <div
-                  key={label}
-                  className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-3"
-                >
-                  <Icon />
-                  <span className="text-xs font-semibold text-white sm:text-sm">{label}</span>
-                </div>
-              ))}
-            </div>
+              <div className="mt-6 grid grid-cols-2 gap-3">
+                {TILES.map(({ label, Icon }) => (
+                  <div
+                    key={label}
+                    className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-3 py-3"
+                  >
+                    <Icon />
+                    <span className="text-xs font-semibold text-white sm:text-sm">{label}</span>
+                  </div>
+                ))}
+              </div>
 
-            <div className="mt-8 flex justify-center lg:justify-start">
-              {badge ? (
+              <div className="mt-8 flex justify-center lg:justify-start">
+                {badge ? (
+                  <a
+                    href={siteConfig.playStoreUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Get it on Google Play"
+                  >
+                    <Image
+                      src={badge.src}
+                      alt="Get it on Google Play"
+                      width={badge.width}
+                      height={badge.height}
+                      className="h-[52px] w-auto"
+                    />
+                  </a>
+                ) : (
+                  <LinkButton href={siteConfig.playStoreUrl} size="lg" className="gap-2">
+                    <PhoneIcon />
+                    Install the App
+                  </LinkButton>
+                )}
+              </div>
+
+              <p className="mt-4 text-center text-sm text-white/60 lg:text-left">
+                Questions?{" "}
                 <a
-                  href={siteConfig.playStoreUrl}
+                  href={whatsappLink()}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Get it on Google Play"
+                  className="font-semibold text-mint hover:underline"
                 >
-                  <Image
-                    src={badge.src}
-                    alt="Get it on Google Play"
-                    width={badge.width}
-                    height={badge.height}
-                    className="h-[52px] w-auto"
-                  />
+                  Ask on WhatsApp
                 </a>
-              ) : (
-                <LinkButton href={siteConfig.playStoreUrl} size="lg" className="gap-2">
-                  <PhoneIcon />
-                  Install the App
-                </LinkButton>
-              )}
-            </div>
-
-            <p className="mt-4 text-center text-sm text-white/60 lg:text-left">
-              Questions?{" "}
-              <a
-                href={whatsappLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-semibold text-mint hover:underline"
-              >
-                Ask on WhatsApp
-              </a>
-            </p>
+              </p>
+            </Reveal>
           </div>
 
           <div className="mt-10 hidden justify-center lg:mt-0 lg:flex">

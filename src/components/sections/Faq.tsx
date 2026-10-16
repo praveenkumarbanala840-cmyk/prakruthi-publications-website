@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Container from "@/components/ui/Container";
+import Reveal from "@/components/ui/Reveal";
 import { siteConfig, whatsappLink } from "@/lib/site-config";
 import { faqs } from "@/data/faqs";
 
@@ -124,11 +125,13 @@ export default function Faq() {
   return (
     <section className="bg-ink py-14 sm:py-20">
       <Container className="max-w-3xl">
-        <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl">
-          Frequently Asked Questions
-        </h2>
+        <Reveal variant="fade-up">
+          <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl">
+            Frequently Asked Questions
+          </h2>
+        </Reveal>
 
-        <div className="mt-10 space-y-3">
+        <Reveal variant="fade-up" className="mt-10 space-y-3">
           {faqs.map((faq) => (
             <details
               key={faq.question}
@@ -153,12 +156,12 @@ export default function Faq() {
                   />
                 </svg>
               </summary>
-              <p className="px-5 pb-5 text-sm leading-relaxed text-white/75 sm:text-base">
+              <p className="faq-answer px-5 pb-5 text-sm leading-relaxed text-white/75 sm:text-base">
                 {renderAnswer(faq.question, faq.answer)}
               </p>
             </details>
           ))}
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

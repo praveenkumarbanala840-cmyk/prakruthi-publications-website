@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
+import Reveal from "@/components/ui/Reveal";
 import { siteConfig, whatsappLink } from "@/lib/site-config";
 
 export const metadata: Metadata = {
@@ -24,7 +25,7 @@ export default function ContactPage() {
       </section>
 
       <Container className="max-w-2xl py-10">
-        <div className="space-y-4">
+        <Reveal variant="fade-up" className="space-y-4">
           <div className="flex flex-wrap gap-3">
             <LinkButton href={siteConfig.playStoreUrl} size="lg">
               Enroll Now
@@ -72,7 +73,7 @@ export default function ContactPage() {
               )}
             </ul>
           )}
-        </div>
+        </Reveal>
       </Container>
     </>
   );

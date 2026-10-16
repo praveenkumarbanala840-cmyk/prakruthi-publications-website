@@ -2,7 +2,7 @@ import Link from "next/link";
 import { AnchorHTMLAttributes, ButtonHTMLAttributes } from "react";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-mint disabled:opacity-50 disabled:pointer-events-none";
+  "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors motion-safe:transition-[transform,box-shadow] motion-safe:duration-[180ms] motion-safe:hover:-translate-y-0.5 motion-safe:hover:shadow-[0_8px_20px_-6px_rgba(0,232,160,0.45)] motion-safe:active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-mint disabled:opacity-50 disabled:pointer-events-none";
 
 const variants = {
   primary: "bg-mint text-black hover:bg-mint-dark shadow-sm",

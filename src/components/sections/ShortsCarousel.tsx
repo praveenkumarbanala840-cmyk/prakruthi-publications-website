@@ -4,6 +4,7 @@ import { useMemo, useRef, useState } from "react";
 import Container from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
 import ClickToLoadVideo from "@/components/ui/ClickToLoadVideo";
+import Reveal from "@/components/ui/Reveal";
 import { shortVideos, shortsHeading, shortsSubheading } from "@/data/videos";
 import { siteConfig } from "@/lib/site-config";
 
@@ -92,8 +93,10 @@ export default function ShortsCarousel() {
   return (
     <section className="bg-ink py-14 sm:py-20">
       <Container>
-        <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl">{shortsHeading}</h2>
-        <p className="mx-auto mt-2 max-w-md text-center text-sm text-white/60">{shortsSubheading}</p>
+        <Reveal variant="fade-up">
+          <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl">{shortsHeading}</h2>
+          <p className="mx-auto mt-2 max-w-md text-center text-sm text-white/60">{shortsSubheading}</p>
+        </Reveal>
 
         <div
           role="region"

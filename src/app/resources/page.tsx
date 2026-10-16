@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Container from "@/components/ui/Container";
+import Reveal from "@/components/ui/Reveal";
 import { papersByExam } from "@/data/papers";
 
 const SUMMARY_CARD_THRESHOLD = 20;
@@ -70,8 +71,8 @@ export default function ResourcesPage() {
 
       <Container className="max-w-3xl py-10">
         <div className="space-y-12">
-          {groups.map((group) => (
-            <div key={group.exam}>
+          {groups.map((group, i) => (
+            <Reveal key={group.exam} variant="fade-up" index={i}>
               <div className="flex flex-wrap items-baseline justify-between gap-2">
                 <h2 className="font-display text-xl font-bold text-charcoal">{group.label}</h2>
                 <p className="text-xs text-charcoal/50">{group.source}</p>
@@ -80,7 +81,7 @@ export default function ResourcesPage() {
               {group.papers.length > SUMMARY_CARD_THRESHOLD ? (
                 <Link
                   href={group.previousPapersHref}
-                  className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-charcoal/10 bg-white p-5 transition-colors hover:border-teal"
+                  className="mt-4 flex items-center justify-between gap-3 rounded-xl border border-charcoal/10 bg-white p-5 transition-all motion-safe:hover:-translate-y-1 hover:border-teal motion-safe:active:scale-[0.98]"
                 >
                   <div>
                     <p className="font-display font-bold text-charcoal">
@@ -109,7 +110,7 @@ export default function ResourcesPage() {
                       <a
                         href={paper.path}
                         download
-                        className="shrink-0 rounded-full bg-mint px-4 py-1.5 text-xs font-semibold text-black hover:bg-mint-dark"
+                        className="shrink-0 rounded-full bg-mint px-4 py-1.5 text-xs font-semibold text-black transition-transform hover:bg-mint-dark motion-safe:active:scale-[0.96]"
                       >
                         Download PDF
                       </a>
@@ -117,7 +118,7 @@ export default function ResourcesPage() {
                   ))}
                 </ul>
               )}
-            </div>
+            </Reveal>
           ))}
         </div>
       </Container>

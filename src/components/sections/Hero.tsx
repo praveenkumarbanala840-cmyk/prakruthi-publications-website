@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Container from "@/components/ui/Container";
 import { LinkButton } from "@/components/ui/Button";
+import CountUp from "@/components/ui/CountUp";
 import { siteConfig, visibleExams } from "@/lib/site-config";
 
 const PHOTO_MASK =
@@ -24,7 +25,7 @@ export default function Hero() {
               {visibleExams.map((exam) => exam.shortName).join(" · ")} Coaching
             </p>
             <h1 className="mt-5 font-display text-4xl font-extrabold leading-tight sm:text-5xl">
-              {siteConfig.stats.studentsTrained} Students Trained for
+              <CountUp value={siteConfig.stats.studentsTrained} /> Students Trained for
               <span className="text-mint"> Government Exam Success</span>
             </h1>
             <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg lg:mx-0">
@@ -55,7 +56,7 @@ export default function Hero() {
 
             <div className="relative mt-4">
               <div
-                className="absolute inset-0 -z-10 scale-110 rounded-full bg-mint/25 blur-3xl"
+                className="animate-glow-pulse absolute inset-0 -z-10 rounded-full bg-mint/25 blur-3xl"
                 aria-hidden="true"
               />
               <div

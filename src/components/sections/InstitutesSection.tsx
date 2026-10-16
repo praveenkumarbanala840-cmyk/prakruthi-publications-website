@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Container from "@/components/ui/Container";
+import Reveal from "@/components/ui/Reveal";
 import { institutes, type InstitutePoster } from "@/data/institutes";
 
 function ChevronIcon({ direction }: { direction: "left" | "right" }) {
@@ -199,12 +200,14 @@ export default function InstitutesSection() {
   return (
     <section className="bg-ink py-8">
       <Container>
-        <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl">
-          Where GS Rao Has Taught
-        </h2>
-        <p className="mx-auto mt-1 max-w-md text-center text-sm text-white/60">
-          A selection of institutes across Andhra Pradesh and Telangana.
-        </p>
+        <Reveal variant="fade-up">
+          <h2 className="text-center font-display text-2xl font-bold text-white sm:text-3xl">
+            Where GS Rao Has Taught
+          </h2>
+          <p className="mx-auto mt-1 max-w-md text-center text-sm text-white/60">
+            A selection of institutes across Andhra Pradesh and Telangana.
+          </p>
+        </Reveal>
 
         <div
           ref={trackRef}

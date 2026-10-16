@@ -56,6 +56,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-surface text-charcoal">
+        <div className="scroll-progress" aria-hidden="true" />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
