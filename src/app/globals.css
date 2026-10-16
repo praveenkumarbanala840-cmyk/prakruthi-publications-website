@@ -58,6 +58,36 @@ html {
   }
 }
 
+/* "Glass" surface shared by the header, the Courses dropdown, and the
+   mobile menu panel: translucent dark background + blur, never
+   animated. rgba(0,10,10,*) is --color-ink as a literal rgba (CSS
+   custom properties can't be fed into rgba()'s component slots). */
+.glass-surface {
+  background-color: rgba(0, 10, 10, 0.72);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+}
+
+/* Header-only extras: exact border/shadow spec. */
+.glass-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-surface {
+    background-color: rgba(0, 10, 10, 0.96);
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .glass-surface {
+    background-color: rgb(0, 10, 10);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+
 /* Phone mockup float — ±8px over 6s. Only used by PhoneMockup.tsx. */
 @keyframes float-y {
   0%,

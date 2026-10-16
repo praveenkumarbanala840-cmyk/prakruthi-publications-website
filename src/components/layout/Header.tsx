@@ -18,7 +18,7 @@ export default function Header() {
   const [coursesOpen, setCoursesOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-ink/95 backdrop-blur">
+    <header className="glass-surface glass-header sticky top-0 z-[70]">
       <Container className="flex h-16 items-center justify-between">
         <Link href="/" className="flex min-w-0 flex-1 items-center gap-2 font-display font-bold text-white md:flex-none">
           <Image
@@ -48,7 +48,7 @@ export default function Header() {
               </svg>
             </button>
             {coursesOpen && (
-              <div className="absolute left-0 top-full w-64 rounded-xl border border-white/10 bg-ink-light p-2 shadow-lg">
+              <div className="glass-surface absolute left-0 top-full w-64 rounded-xl border border-white/10 p-2 shadow-lg">
                 {visibleExams.map((exam) => (
                   <Link
                     key={exam.slug}
@@ -94,7 +94,7 @@ export default function Header() {
       </Container>
 
       {menuOpen && (
-        <div className="border-t border-white/10 bg-ink md:hidden">
+        <div className="glass-surface border-t border-white/10 md:hidden">
           <Container className="flex flex-col gap-1 py-3">
             <p className="px-3 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-white/50">
               Courses
