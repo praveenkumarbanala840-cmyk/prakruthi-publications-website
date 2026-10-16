@@ -94,6 +94,7 @@ export default function Reviews({ reviews }: { reviews: Review[] }) {
   const scrollDebounce = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [sidePad, setSidePad] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   const prefersReducedMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -112,6 +113,21 @@ export default function Reviews({ reviews }: { reviews: Review[] }) {
     ro.observe(track);
     return () => ro.disconnect();
   }, [items.length]);
+
+  // Auto-scroll to the next card every few seconds; paused on hover/touch
+  // (see the handlers on the track below) and whenever the user prefers
+  // reduced motion.
+  useEffect(() => {
+    if (isPaused || prefersReducedMotion || items.length <= 1) return;
+    const id = setInterval(() => {
+      goTo((activeIndex + 1) % items.length);
+    }, 4000);
+    return () => clearInterval(id);
+    // goTo is a plain function (not memoized) that only reads activeIndex
+    // via its own parameter, so omitting it here avoids re-subscribing the
+    // timer on every unrelated render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isPaused, activeIndex, items.length, prefersReducedMotion]);
 
   if (items.length === 0) return null;
 
@@ -167,6 +183,12 @@ export default function Reviews({ reviews }: { reviews: Review[] }) {
             tabIndex={0}
             onKeyDown={handleKeyDown}
             onScroll={handleScroll}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onTouchStart={() => setIsPaused(true)}
+            onTouchEnd={() => setIsPaused(false)}
+            onFocus={() => setIsPaused(true)}
+            onBlur={() => setIsPaused(false)}
             style={{ paddingLeft: sidePad, paddingRight: sidePad }}
             className="flex snap-x snap-mandatory gap-4 overflow-x-auto overflow-y-hidden scroll-smooth focus:outline-none [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
