@@ -23,6 +23,7 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
   // reference it uses — is dead-code-eliminated from the production
   // build) and the whole section is hidden in production.
   const promoYoutubeId = exam.introVideo?.youtubeId || promoVideo.youtubeId;
+  const promoTitle = exam.introVideo?.youtubeId ? exam.introVideo.title : promoVideo.title;
   const showLocalPromoFallback =
     !promoYoutubeId && process.env.NODE_ENV !== "production" && Boolean(promoVideo.src);
   const showCourseOverviewVideo = Boolean(promoYoutubeId) || showLocalPromoFallback;
@@ -125,7 +126,7 @@ export default function CoursePageTemplate({ exam }: { exam: ExamContent }) {
               {promoYoutubeId ? (
                 <ClickToLoadVideo
                   youtubeId={promoYoutubeId}
-                  title={exam.introVideo?.title}
+                  title={promoTitle}
                   label="Course"
                 />
               ) : (
