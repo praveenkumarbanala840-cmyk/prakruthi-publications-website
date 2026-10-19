@@ -359,3 +359,16 @@ details:not([open]) > .faq-answer {
     display: none;
   }
 }
+
+/* Books mobile scroller — scroll-padding keeps snapped cards clear of the
+   row's own side padding (px-4), so a snapped card's edge lines up with
+   the visible content edge instead of sitting underneath the padding. */
+.books-scroll {
+  scroll-padding-inline: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .books-scroll {
+    scroll-behavior: auto;
+  }
+}

@@ -19,21 +19,25 @@ export default function Books() {
           <p className="mt-2 text-sm text-white/60 sm:text-base">Study material prepared by Prof. GS Rao</p>
         </Reveal>
 
+        <p className="mt-4 text-center text-xs font-semibold uppercase tracking-wide text-white/40 sm:hidden">
+          Swipe to see more →
+        </p>
+
         <div
-          className="mt-12 flex snap-x snap-mandatory gap-8 overflow-x-auto px-4 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:snap-none sm:grid-cols-2 sm:justify-items-center sm:gap-x-8 sm:gap-y-14 sm:overflow-visible sm:px-0 sm:pb-0 md:grid-cols-3 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden"
+          className="books-scroll mt-6 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-4 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] sm:mt-10 sm:flex-wrap sm:snap-none sm:justify-center sm:gap-x-8 sm:gap-y-14 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid lg:grid-cols-5 lg:justify-items-center [&::-webkit-scrollbar]:hidden"
         >
           {sorted.map((book, i) => (
-            <Reveal key={book.cover} variant="fade-up" index={i} className="shrink-0 snap-center">
+            <Reveal key={book.cover} variant="fade-up" index={i} className="shrink-0 snap-start">
               <figure
                 tabIndex={0}
-                className="book-tilt group w-[150px] cursor-default rounded-md outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 focus-visible:ring-offset-ink sm:w-[180px]"
+                className="book-tilt group w-[70vw] max-w-[260px] cursor-default rounded-md outline-none focus-visible:ring-2 focus-visible:ring-mint focus-visible:ring-offset-2 focus-visible:ring-offset-ink sm:w-[180px]"
               >
                 <div className="book-tilt-cover relative aspect-[3/4] w-full overflow-hidden rounded-r-md rounded-l-[2px] bg-ink-light">
                   <Image
                     src={book.cover}
                     alt={book.alt}
                     fill
-                    sizes="(max-width: 640px) 150px, 180px"
+                    sizes="(max-width: 640px) 70vw, 180px"
                     loading="lazy"
                     className="object-cover"
                   />
@@ -41,7 +45,7 @@ export default function Books() {
                   <span className="book-tilt-edge-right" aria-hidden="true" />
                   <span className="book-tilt-edge-bottom" aria-hidden="true" />
                 </div>
-                <figcaption className="mt-5 text-center text-sm font-medium leading-snug text-white/80">
+                <figcaption className="mt-5 h-[58px] text-center text-sm font-medium leading-snug text-white/80 line-clamp-3">
                   {book.title}
                 </figcaption>
               </figure>
