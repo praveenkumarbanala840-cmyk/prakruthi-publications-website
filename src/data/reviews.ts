@@ -19,6 +19,12 @@ export interface Review {
 
 export const reviews: Review[] = [
   {
+    name: "Madhu",
+    photo: "/students/madhu.webp",
+    review:
+      "GS Rao sir has a way of making even the hardest lessons feel easy, but what I admire most is the person behind those lessons. His patience, dedication, and the little things he does make learning feel special in a way words can't fully explain. Sometimes, the people who inspire us the most are the ones who make us believe in ourselves a little more. ❤️",
+  },
+  {
     name: "Balu",
     photo: "/students/balu.webp",
     review:
@@ -59,12 +65,6 @@ export const reviews: Review[] = [
     photo: "/students/likitha.webp",
     review:
       "Psychology was my weak point in DSC preparation. Sir explains with good examples, and his classes and books made difficult concepts easy. His guidance motivated me to prepare better.",
-  },
-  {
-    name: "Madhu",
-    photo: "/students/madhu.webp",
-    review:
-      "Psychology felt difficult when I started DSC preparation, but sir's classes made the topics easy. Whenever I was confused, his guidance kept me going.",
   },
   {
     name: "Malleswara Rao",
