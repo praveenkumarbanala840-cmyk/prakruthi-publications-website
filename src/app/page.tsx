@@ -1,6 +1,7 @@
 import Hero from "@/components/sections/Hero";
 import CredibilityBar from "@/components/sections/CredibilityBar";
 import CoursesPreview from "@/components/sections/CoursesPreview";
+import Books from "@/components/sections/Books";
 import ShortsCarousel from "@/components/sections/ShortsCarousel";
 import InstitutesSection from "@/components/sections/InstitutesSection";
 import Reviews from "@/components/sections/Reviews";
@@ -14,6 +15,7 @@ export default function Home() {
       <Hero />
       <CredibilityBar />
       <CoursesPreview />
+      <Books />
       <ShortsCarousel />
       <InstitutesSection />
       <Reviews reviews={reviews} />
