@@ -18,7 +18,6 @@ export const institutes: InstitutePoster[] = [
   { src: "/institutes/institute-05.webp", alt: "Abdul Kalam Competitive Academy poster, Eluru" },
   { src: "/institutes/institute-06.webp", alt: "Teachers Academy coaching poster, Punganur" },
   { src: "/institutes/institute-07.webp", alt: "Kutty Study Circle coaching poster, Chittoor" },
-  { src: "/institutes/institute-08.webp", alt: "Sri Sri Institute poster, Vijayanagaram" },
   { src: "/institutes/institute-09.webp", alt: "Vijetha Study Circle coaching poster" },
   { src: "/institutes/institute-10.webp", alt: "Kutty Study Circle coaching poster, Chittoor and Palamaneru" },
   { src: "/institutes/institute-11.webp", alt: "Sri Pragna Coaching Center poster, Kothagudem, Telangana" },
